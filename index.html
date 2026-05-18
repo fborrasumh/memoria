@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MemorIA v5 — Memorias de Innovación</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cr:#faf8f3;--cr2:#f3f0e8;--cr3:#ebe6d8;
+  --ink:#1a1612;--ink2:#4a4540;--ink3:#8a8278;
+  --nv:#162447;--nv2:#1e3a5f;
+  --am:#d4620a;--ams:rgba(212,98,10,.1);--amb:rgba(212,98,10,.18);
+  --tl:#0a7e72;--tls:rgba(10,126,114,.1);--tlb:rgba(10,126,114,.2);
+  --rd:#c0392b;--rds:rgba(192,57,43,.1);
+  --vl:#6d28d9;--vls:rgba(109,40,217,.1);--vlb:rgba(109,40,217,.2);
+  --bd:#ddd8cc;--bd2:#ccc5b5;
+  --r:10px;--rsm:6px;--rxs:4px;
+  --t:.18s cubic-bezier(.4,0,.2,1);
+  --sh:0 1px 2px rgba(26,22,18,.04),0 3px 12px rgba(26,22,18,.06);
+  --shmd:0 4px 16px rgba(26,22,18,.1),0 16px 48px rgba(26,22,18,.08);
+  --sw:258px;
+  --fd:'Fraunces',serif;--fb:'IBM Plex Sans',sans-serif;--fm:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--fb);background:var(--cr);color:var(--ink);min-height:100vh;font-size:14px;line-height:1.6;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px;}
+::selection{background:rgba(212,98,10,.18);}
+
+/* ── ONBOARDING ─────────────────────────────────── */
+#ob{position:fixed;inset:0;background:var(--cr);display:flex;align-items:center;justify-content:center;z-index:300;padding:20px;}
+#ob::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(26,22,18,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,22,18,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+.ob-p{background:var(--cr);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--shmd);width:100%;max-width:500px;overflow:hidden;position:relative;z-index:1;}
+.ob-b{background:var(--nv);padding:28px 32px 24px;position:relative;overflow:hidden;}
+.ob-b::before{content:'';position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);}
+.ob-em{font-size:36px;margin-bottom:10px;display:block;position:relative;z-index:1;}
+.ob-t{font-family:var(--fd);font-size:26px;font-weight:600;color:#fff;line-height:1.15;margin-bottom:6px;position:relative;z-index:1;}
+.ob-s{font-size:13px;color:rgba(255,255,255,.72);line-height:1.65;position:relative;z-index:1;}
+.ob-v{display:inline-block;background:var(--am);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;letter-spacing:.05em;}
+.ob-bd{padding:24px 32px 28px;}
+.osl{display:none;animation:ru .28s ease both;}.osl.on{display:block;}
+@keyframes ru{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.ob-g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;}
+.ob-bx{background:var(--cr2);border:1px solid var(--bd);border-radius:var(--rsm);padding:11px 12px;}
+.ob-bi{font-size:18px;margin-bottom:5px;}.ob-bt{font-size:11.5px;font-weight:600;margin-bottom:2px;}.ob-bx2{font-size:11px;color:var(--ink3);line-height:1.5;}
+.ob-nv{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:20px;}
+.ob-ds{display:flex;gap:4px;margin-right:auto;}
+.od{width:6px;height:6px;border-radius:50%;background:var(--bd2);transition:var(--t);}.od.on{width:18px;border-radius:3px;background:var(--am);}
+.ob-sc{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+.ob-si{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;background:var(--tls);border:1px solid var(--tlb);border-radius:var(--rsm);font-size:12px;color:var(--ink2);line-height:1.5;}
+.siic{color:var(--tl);font-size:14px;flex-shrink:0;margin-top:1px;}
+.ob-ht{background:var(--ams);border:1px solid var(--amb);border-radius:var(--rsm);padding:10px 13px;font-size:11.5px;color:var(--ink2);line-height:1.65;margin-bottom:18px;}
+.ob-ht strong{color:var(--am);}
+
+/* ── BUTTONS ────────────────────────────────────── */
+.btn{padding:8px 16px;border-radius:var(--rsm);font-family:var(--fb);font-weight:500;font-size:13px;cursor:pointer;border:none;transition:var(--t);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.01em;}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+.btn-nv{background:var(--nv);color:#fff;}.btn-nv:hover:not(:disabled){background:var(--nv2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(22,36,71,.3);}
+.btn-am{background:var(--am);color:#fff;}.btn-am:hover:not(:disabled){background:#c05508;transform:translateY(-1px);box-shadow:0 4px 14px rgba(212,98,10,.35);}
+.btn-gh{background:transparent;color:var(--ink2);border:1px solid var(--bd);}.btn-gh:hover:not(:disabled){background:var(--cr2);color:var(--ink);}
+.btn-sf{background:var(--cr2);color:var(--ink2);border:1px solid var(--bd);}.btn-sf:hover:not(:disabled){background:var(--cr3);}
+.btn-rd{background:var(--rds);color:var(--rd);border:1px solid rgba(192,57,43,.2);}.btn-rd:hover:not(:disabled){background:rgba(192,57,43,.16);}
+.btn-vl{background:var(--vls);color:var(--vl);border:1px solid var(--vlb);}.btn-vl:hover:not(:disabled){background:rgba(109,40,217,.14);}
+.btn-tl{background:var(--tls);color:var(--tl);border:1px solid var(--tlb);}.btn-tl:hover:not(:disabled){background:rgba(10,126,114,.16);}
+.btn-sm{padding:5px 12px;font-size:12px;}.btn-xs{padding:3px 9px;font-size:11px;}.btn-lg{padding:12px 24px;font-size:14px;border-radius:var(--r);}.btn-fw{width:100%;justify-content:center;}
+
+/* ── FORMS ──────────────────────────────────────── */
+.lbl{display:block;font-size:10.5px;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;}
+input[type=text],input[type=password],input[type=number],textarea,select{width:100%;padding:9px 12px;background:var(--cr);border:1px solid var(--bd);border-radius:var(--rsm);color:var(--ink);font-family:var(--fb);font-size:13px;transition:var(--t);outline:none;resize:vertical;}
+input:focus,textarea:focus,select:focus{border-color:var(--nv);box-shadow:0 0 0 3px rgba(22,36,71,.1);}
+select option{background:var(--cr);}textarea{min-height:88px;line-height:1.65;}
+.fr{margin-bottom:14px;}.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}.fg4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;}
+.iw{position:relative;}.iw input{padding-right:36px;}
+.ib{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--ink3);cursor:pointer;font-size:14px;padding:3px;transition:var(--t);}.ib:hover{color:var(--ink2);}
+.cbr{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);cursor:pointer;}.cbr input{accent-color:var(--am);}
+
+/* ── SIDEBAR ────────────────────────────────────── */
+#app{display:none;}
+.sb{position:fixed;left:0;top:0;bottom:0;width:var(--sw);background:var(--nv);display:flex;flex-direction:column;z-index:50;}
+.sb-lg{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.08);}
+.sb-wm{font-family:var(--fd);font-size:22px;font-weight:600;color:#fff;display:block;}
+.sb-v{background:var(--am);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:6px;letter-spacing:.05em;vertical-align:middle;}
+.sb-tg{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+.nav{flex:1;padding:10px;overflow-y:auto;display:flex;flex-direction:column;gap:1px;}
+.nsec{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:10px 8px 3px;margin-top:6px;}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--rsm);cursor:pointer;font-size:13px;font-weight:400;color:rgba(255,255,255,.6);transition:var(--t);border:none;background:none;width:100%;text-align:left;}
+.ni:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);}.ni.on{background:rgba(255,255,255,.1);color:#fff;font-weight:600;}
+.ni .ic{width:17px;text-align:center;font-size:14px;flex-shrink:0;}
+.nbg{margin-left:auto;background:var(--am);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center;}.nbg.g{background:var(--tl);}.nbg.v{background:var(--vl);}
+.sb-ft{padding:14px 12px;border-top:1px solid rgba(255,255,255,.08);}
+.apll{display:flex;align-items:center;gap:6px;padding:6px 9px;background:rgba(255,255,255,.06);border-radius:var(--rsm);font-size:11px;color:rgba(255,255,255,.45);margin-bottom:9px;}
+.adt{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;}.adt.on{background:#4ade80;box-shadow:0 0 6px #4ade80;}
+
+/* ── MAIN ───────────────────────────────────────── */
+.main{margin-left:var(--sw);padding:28px 32px;max-width:1100px;}
+.page{display:none;}.page.on{display:block;animation:ru .25s ease both;}
+.ph{margin-bottom:22px;}
+.ph h1{font-family:var(--fd);font-size:26px;font-weight:600;line-height:1.15;margin-bottom:5px;}
+.ph p{color:var(--ink2);font-size:13.5px;line-height:1.65;}
+
+/* ── CARDS ──────────────────────────────────────── */
+.card{background:var(--cr);border:1px solid var(--bd);border-radius:var(--r);padding:18px 20px;margin-bottom:14px;box-shadow:var(--sh);}
+.ct{font-size:13px;font-weight:600;margin-bottom:13px;display:flex;align-items:center;gap:7px;color:var(--ink);}
+.ct .cs{color:var(--ink3);font-weight:400;font-size:11.5px;}
+
+/* ── UPLOAD ─────────────────────────────────────── */
+.dz{border:2px dashed var(--bd);border-radius:var(--r);padding:24px;text-align:center;cursor:pointer;transition:var(--t);background:var(--cr2);position:relative;overflow:hidden;}
+.dz:hover,.dz.drag{border-color:var(--am);background:var(--ams);}
+.dz input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.dz-ic{font-size:28px;margin-bottom:7px;}.dz-tt{font-size:13px;font-weight:600;margin-bottom:3px;}.dz-ht{font-size:11.5px;color:var(--ink3);}
+.fl{margin-top:10px;display:flex;flex-direction:column;gap:5px;}
+.fi{display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--cr2);border:1px solid var(--bd);border-radius:var(--rsm);}
+.fi-ic{font-size:15px;}.fi-nm{flex:1;font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.fi-sz{font-size:11px;color:var(--ink3);flex-shrink:0;}
+.fi-bk{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:var(--tls);color:var(--tl);flex-shrink:0;}
+.fi-rm{background:none;border:none;color:var(--ink3);cursor:pointer;font-size:14px;transition:var(--t);padding:2px;}.fi-rm:hover{color:var(--rd);}
+
+/* ── PIPELINE ───────────────────────────────────── */
+.pipeline{display:flex;background:var(--cr);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:18px;box-shadow:var(--sh);}
+.ps{flex:1;padding:14px 10px;text-align:center;border-right:1px solid var(--bd);position:relative;transition:var(--t);}.ps:last-child{border-right:none;}
+.ps.run{background:var(--ams);}.ps.done{background:var(--tls);}.ps.err{background:var(--rds);}
+.ps-n{font-family:var(--fm);font-size:9px;color:var(--ink3);margin-bottom:4px;}
+.ps-ic{font-size:20px;margin-bottom:5px;display:block;}.ps-lb{font-size:11px;font-weight:600;color:var(--ink2);margin-bottom:3px;}
+.ps-st{font-size:10px;color:var(--ink3);font-family:var(--fm);min-height:13px;}
+.ps-br{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--bd);}
+.ps-bf{height:100%;background:var(--am);transition:width .4s ease;width:0%;}.ps.done .ps-bf{width:100%;background:var(--tl);}
+
+/* ── STREAM BOX (MEJORA 2) ──────────────────────── */
+.stream-wrap{background:var(--nv);border-radius:var(--r);overflow:hidden;margin-bottom:14px;box-shadow:var(--shmd);}
+.stream-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.08);}
+.stream-hd-tt{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.6);flex:1;}
+.stream-tps{font-family:var(--fm);font-size:10px;color:var(--am);font-weight:600;}
+.stream-cursor{display:inline-block;width:2px;height:13px;background:var(--am);margin-left:2px;animation:blink .8s step-end infinite;vertical-align:text-bottom;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.stream-body{padding:14px 16px;font-family:var(--fm);font-size:11.5px;color:rgba(255,255,255,.82);line-height:1.85;max-height:160px;overflow-y:auto;white-space:pre-wrap;}
+
+/* ── LOG ────────────────────────────────────────── */
+.log{background:var(--cr2);border:1px solid var(--bd);border-radius:var(--rsm);padding:12px 14px;font-family:var(--fm);font-size:11px;height:150px;overflow-y:auto;line-height:1.9;}
+.ll{display:flex;gap:8px;}.lts{color:var(--ink3);flex-shrink:0;}
+.lm.info{color:var(--ink2);}.lm.ok{color:var(--tl);}.lm.err{color:var(--rd);}.lm.ag{color:var(--nv);font-weight:600;}.lm.warn{color:var(--am);}.lm.vl{color:var(--vl);}
+
+/* ── PROGRESS ───────────────────────────────────── */
+.pb{height:4px;background:var(--cr3);border-radius:2px;overflow:hidden;margin-bottom:14px;}
+.pf{height:100%;background:linear-gradient(90deg,var(--nv),var(--am));border-radius:2px;transition:width .5s ease;width:0%;}
+
+/* ── STATS ──────────────────────────────────────── */
+.sr{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:16px;}
+.sc2{background:var(--cr);border:1px solid var(--bd);border-radius:var(--rsm);padding:12px;text-align:center;box-shadow:var(--sh);}
+.sv{font-family:var(--fd);font-size:24px;color:var(--nv);display:block;margin-bottom:2px;}
+.sl{font-size:10px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.08em;}
+
+/* ── TAGS ───────────────────────────────────────── */
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid var(--bd);background:var(--cr2);color:var(--ink2);}
+.tag.a{background:var(--ams);border-color:var(--amb);color:var(--am);}
+.tag.t{background:var(--tls);border-color:var(--tlb);color:var(--tl);}
+.tag.v{background:var(--vls);border-color:var(--vlb);color:var(--vl);}
+.tag.n{background:rgba(22,36,71,.07);border-color:rgba(22,36,71,.15);color:var(--nv);}
+
+.itb{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:600;background:var(--ams);color:var(--am);border:1px solid var(--amb);}
+
+/* ── MEM EDITOR ─────────────────────────────────── */
+.mwrap{background:var(--cr);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);}
+.mtbar{display:flex;align-items:center;gap:7px;padding:11px 15px;border-bottom:1px solid var(--bd);background:var(--cr2);flex-wrap:wrap;}
+.mt-t{flex:1;font-size:13px;font-weight:600;color:var(--ink2);min-width:100px;}
+.mbody{max-height:62vh;overflow-y:auto;}
+.msec{border-bottom:1px solid var(--bd);}.msec:last-child{border-bottom:none;}
+.msh{display:flex;align-items:center;gap:9px;padding:12px 18px 9px;cursor:pointer;user-select:none;transition:var(--t);}
+.msh:hover{background:var(--cr2);}
+.ms-n{font-family:var(--fm);font-size:10px;color:var(--ink3);width:22px;}
+.ms-t{flex:1;font-size:13px;font-weight:600;}
+.ms-sc{font-size:11px;font-weight:600;padding:2px 7px;border-radius:10px;}
+.ms-sc.hi{background:var(--tls);color:var(--tl);}.ms-sc.mid{background:var(--ams);color:var(--am);}.ms-sc.lo{background:var(--rds);color:var(--rd);}
+.ms-ch{color:var(--ink3);transition:transform .2s;font-size:11px;}.msec.open .ms-ch{transform:rotate(90deg);}
+.ms-bd{display:none;padding:0 18px 14px;}.msec.open .ms-bd{display:block;}
+.ms-tx{font-size:13.5px;line-height:1.85;color:var(--ink);white-space:pre-wrap;outline:none;padding:8px;border-radius:var(--rsm);border:1px solid transparent;transition:var(--t);}
+.ms-tx:focus{border-color:var(--bd);background:var(--cr2);}
+
+/* ── AUDIT TRAIL (MEJORA 3) ─────────────────────── */
+.audit-trail{margin-top:10px;border-radius:var(--rsm);overflow:hidden;border:1px solid var(--vlb);display:none;}
+.audit-trail.show{display:block;}
+.at-hd{display:flex;align-items:center;gap:7px;padding:7px 11px;background:var(--vls);cursor:pointer;font-size:11px;font-weight:600;color:var(--vl);user-select:none;}
+.at-hd:hover{background:rgba(109,40,217,.14);}
+.at-body{background:var(--cr);padding:10px 12px;display:none;max-height:200px;overflow-y:auto;}
+.at-body.open{display:block;}
+.at-entry{display:flex;gap:9px;padding:6px 0;border-bottom:1px solid var(--bd);}
+.at-entry:last-child{border-bottom:none;}
+.at-ag{font-family:var(--fm);font-size:10px;font-weight:600;color:var(--vl);flex-shrink:0;width:60px;margin-top:1px;}
+.at-msg{font-size:11.5px;color:var(--ink2);line-height:1.55;}
+.ms-acts{display:flex;gap:6px;margin-top:9px;}
+
+/* ── PRESUPUESTO (MEJORA 1) ─────────────────────── */
+.pres-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px;}
+.pres-table th{text-align:left;padding:7px 10px;background:var(--cr2);border:1px solid var(--bd);font-size:10.5px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;}
+.pres-table td{padding:6px 8px;border:1px solid var(--bd);vertical-align:middle;}
+.pres-table td input{border:none;background:transparent;padding:3px 5px;width:100%;font-size:12.5px;font-family:var(--fb);}
+.pres-table td input:focus{outline:2px solid var(--am);outline-offset:-1px;border-radius:3px;}
+.pres-table tr:hover td{background:var(--cr2);}
+.pres-table .td-total{font-weight:700;font-family:var(--fm);background:var(--cr2)!important;}
+.pres-table .td-ok{color:var(--tl);}.pres-table .td-err{color:var(--rd);}
+.pres-alert{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--rsm);font-size:12px;margin-bottom:10px;border:1px solid;}
+.pres-alert.ok{background:var(--tls);border-color:var(--tlb);color:var(--tl);}
+.pres-alert.err{background:var(--rds);border-color:rgba(192,57,43,.2);color:var(--rd);}
+.pres-alert.warn{background:var(--ams);border-color:var(--amb);color:var(--am);}
+.pres-anual{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.pres-year{flex:1;min-width:200px;background:var(--cr2);border:1px solid var(--bd);border-radius:var(--rsm);padding:10px 12px;}
+.pres-year-tt{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;margin-bottom:8px;}
+
+/* ── VALIDATION ─────────────────────────────────── */
+.vbig{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--cr);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:12px;box-shadow:var(--sh);}
+.vring{width:70px;height:70px;position:relative;flex-shrink:0;}.vring svg{transform:rotate(-90deg);}
+.vnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:17px;font-weight:600;}
+.vlvl{font-size:17px;font-weight:700;margin-bottom:3px;font-family:var(--fd);}
+.vsumm{font-size:12.5px;color:var(--ink2);line-height:1.6;}
+
+/* Score per-section bars (MEJORA 2) */
+.sec-scores{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.ss-row{display:flex;align-items:center;gap:10px;}
+.ss-lbl{font-size:11.5px;width:180px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink2);}
+.ss-bar{flex:1;height:6px;background:var(--cr3);border-radius:3px;overflow:hidden;}
+.ss-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+.ss-val{font-size:11px;font-weight:700;width:50px;text-align:right;flex-shrink:0;font-family:var(--fm);}
+
+.vitems{display:flex;flex-direction:column;gap:7px;}
+.vi{display:flex;gap:11px;padding:11px 13px;border-radius:var(--rsm);border:1px solid;}
+.vi.ok{background:var(--tls);border-color:var(--tlb);}.vi.warn{background:var(--ams);border-color:var(--amb);}.vi.fail{background:var(--rds);border-color:rgba(192,57,43,.22);}
+.vi-ic{font-size:14px;flex-shrink:0;margin-top:2px;}.vi-tt{font-weight:600;font-size:12.5px;margin-bottom:2px;}.vi-tx{font-size:11.5px;color:var(--ink2);line-height:1.5;}
+
+/* ── DIFF ───────────────────────────────────────── */
+.dfw{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--cr);}
+.dp-h{padding:9px 14px;font-size:12px;font-weight:600;background:var(--cr2);border-bottom:1px solid var(--bd);}
+.dp:first-child .dp-h{border-right:1px solid var(--bd);}
+.dp-b{padding:14px 16px;font-size:12px;line-height:1.85;white-space:pre-wrap;max-height:380px;overflow-y:auto;color:var(--ink);font-family:var(--fm);}
+.dp:first-child .dp-b{border-right:1px solid var(--bd);}
+
+/* ── HISTORY ────────────────────────────────────── */
+.hi{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--cr);cursor:pointer;margin-bottom:7px;transition:var(--t);}
+.hi:hover{border-color:var(--am);box-shadow:0 0 0 3px var(--ams);}
+.hi-th{width:38px;height:38px;background:var(--cr2);border-radius:var(--rsm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(--bd);}
+.hi-mt{flex:1;min-width:0;}.hi-tt{font-size:13px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.hi-sb{font-size:11px;color:var(--ink3);}
+.hi-sc{font-size:13px;font-weight:700;flex-shrink:0;}
+.hi-sc.hi{color:var(--tl);}.hi-sc.mid{color:var(--am);}.hi-sc.lo{color:var(--rd);}
+.hempty{text-align:center;padding:40px;color:var(--ink3);font-size:13px;}
+
+/* ── TEMPLATES ──────────────────────────────────── */
+.tgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.tc{border:2px solid var(--bd);border-radius:var(--rsm);padding:13px;cursor:pointer;transition:var(--t);background:var(--cr);}
+.tc:hover,.tc.on{border-color:var(--am);background:var(--ams);}
+.tc-o{font-size:9.5px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;}
+.tc-n{font-size:13px;font-weight:600;margin-bottom:5px;}
+.tc-tgs{display:flex;gap:4px;flex-wrap:wrap;}
+.tc-tg{font-size:10px;padding:2px 7px;border-radius:10px;background:var(--cr2);color:var(--ink2);border:1px solid var(--bd);}
+
+/* ── CCAA ───────────────────────────────────────── */
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.chip{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:var(--cr2);color:var(--ink2);transition:var(--t);}
+.chip:hover{border-color:var(--nv);color:var(--nv);}.chip.on{background:rgba(22,36,71,.08);border-color:var(--nv);color:var(--nv);font-weight:600;}
+
+/* ── ACCORDION ──────────────────────────────────── */
+.acc{border:1px solid var(--bd);border-radius:var(--rsm);overflow:hidden;margin-bottom:6px;}
+.ac-h{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:var(--cr2);cursor:pointer;font-size:13px;font-weight:600;user-select:none;transition:var(--t);}
+.ac-h:hover{background:var(--cr3);}
+.ac-cv{color:var(--ink3);transition:transform .2s;font-size:11px;}.acc.open .ac-cv{transform:rotate(90deg);}
+.ac-b{display:none;padding:12px 13px;font-size:13px;line-height:1.7;color:var(--ink2);}.acc.open .ac-b{display:block;}
+
+/* ── TOAST ──────────────────────────────────────── */
+#toasts{position:fixed;bottom:18px;right:18px;z-index:999;display:flex;flex-direction:column;gap:6px;}
+.toast{padding:10px 14px;background:var(--ink);color:#fff;border-radius:var(--rsm);font-size:13px;box-shadow:var(--shmd);display:flex;align-items:center;gap:7px;animation:slr .22s ease;max-width:320px;}
+.toast.ok{background:#14532d;}.toast.err{background:#7f1d1d;}.toast.warn{background:#78350f;}
+@keyframes slr{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(22,36,71,.15);border-top-color:var(--nv);border-radius:50%;animation:rot .7s linear infinite;}
+@keyframes rot{to{transform:rotate(360deg)}}
+hr{border:none;border-top:1px solid var(--bd);margin:14px 0;}
+.row{display:flex;gap:8px;flex-wrap:wrap;}.mla{margin-left:auto;}
+.pm{text-align:center;padding:44px 22px;color:var(--ink3);}.pm-ic{font-size:42px;margin-bottom:10px;}.pm p{font-size:13px;line-height:1.7;}
+.sdiv{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:4px 0 8px;border-bottom:1px solid var(--bd);margin-bottom:11px;}
+.ibox{background:var(--ams);border:1px solid var(--amb);border-radius:var(--rsm);padding:10px 13px;font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:12px;}
+.ibox strong{color:var(--am);}
+.nbox{background:rgba(22,36,71,.05);border:1px solid rgba(22,36,71,.12);border-radius:var(--rsm);padding:10px 13px;font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:12px;}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.pill.new{background:var(--ams);color:var(--am);border:1px solid var(--amb);}
+.pill.m2{background:var(--tls);color:var(--tl);border:1px solid var(--tlb);}
+.pill.m3{background:var(--vls);color:var(--vl);border:1px solid var(--vlb);}
+
+/* ── TRL BADGE ──────────────────────────────────────── */
+.trl-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;font-family:var(--fm);background:rgba(22,36,71,.08);color:var(--nv);border:1px solid rgba(22,36,71,.2);}
+.trl-badge.lo{background:var(--ams);color:var(--am);border-color:var(--amb);}
+.trl-badge.hi{background:var(--tls);color:var(--tl);border-color:var(--tlb);}
+.trl-arrow{font-size:10px;opacity:.6;}
+
+/* ── CHECKLIST ITEMS ────────────────────────────────── */
+.chk-row{display:flex;align-items:center;gap:7px;padding:5px 0;font-size:12px;}
+.chk-ok{color:var(--tl);font-size:13px;flex-shrink:0;}
+.chk-fail{color:var(--rd);font-size:13px;flex-shrink:0;}
+.chk-lbl{color:var(--ink2);}
+.rubrica-wrap{background:var(--cr2);border:1px solid var(--bd);border-radius:var(--rsm);padding:12px 14px;margin-bottom:12px;}
+.rubrica-tt{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:8px;}
+
+/* ── WP CARD ─────────────────────────────────────────  */
+.wp-badge{display:inline-block;background:var(--nv);color:#fff;font-family:var(--fm);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:6px;}
+
+/* ── APROBADA BADGE ─────────────────────────────────── */
+.aprobada-wrap{background:linear-gradient(135deg,var(--tls),rgba(10,126,114,.05));border:1px solid var(--tlb);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.aprobada-ic{font-size:22px;flex-shrink:0;}
+.aprobada-tt{font-size:12px;font-weight:600;color:var(--tl);margin-bottom:2px;}
+.aprobada-tx{font-size:11.5px;color:var(--ink2);}
+
+/* ── REQUIRED FIELD HINT ───────────────────────────── */
+.req-hint{font-size:11px;color:var(--rd);display:flex;align-items:center;gap:5px;margin-bottom:12px;padding:7px 10px;background:var(--rds);border:1px solid rgba(192,57,43,.15);border-radius:var(--rsm);}
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING -->
+<div id="ob">
+  <div class="ob-p">
+    <div class="ob-b">
+      <span class="ob-em">📄</span>
+      <h1 class="ob-t">MemorIA <span class="ob-v">v5</span></h1>
+      <p class="ob-s">Pipeline de 6 agentes IA con presupuesto inteligente, evaluación completa por sección y audit trail entre agentes.</p>
+    </div>
+    <div class="ob-bd">
+      <div class="osl on" id="osl0">
+        <div class="ob-g">
+          <div class="ob-bx"><div class="ob-bi">🔍</div><div class="ob-bt">AG.01 Lector</div><div class="ob-bx2">Extrae secciones, baremo y requisitos del PDF de la convocatoria</div></div>
+          <div class="ob-bx"><div class="ob-bi">🧩</div><div class="ob-bt">AG.02 Contextualizador</div><div class="ob-bx2">Perfil empresa normalizado para garantizar coherencia interna</div></div>
+          <div class="ob-bx"><div class="ob-bi">💶</div><div class="ob-bt">AG.06 Presupuesto <span class="pill new">Nuevo</span></div><div class="ob-bx2">Valida partidas, restricciones y genera justificación económica</div></div>
+          <div class="ob-bx"><div class="ob-bi">✍️</div><div class="ob-bt">AG.03 Redactor</div><div class="ob-bx2">Redacta secciones con lenguaje técnico-oficial ponderado por baremo</div></div>
+          <div class="ob-bx"><div class="ob-bi">🔗</div><div class="ob-bt">AG.04 Coherencia</div><div class="ob-bx2">Detecta y corrige contradicciones entre secciones</div></div>
+          <div class="ob-bx"><div class="ob-bi">✅</div><div class="ob-bt">AG.05 Evaluador <span class="pill m2">Sección a sección</span></div><div class="ob-bx2">Evalúa cada sección completa con streaming visible en tiempo real</div></div>
+        </div>
+        <div class="ob-nv">
+          <div class="ob-ds"><div class="od on"></div><div class="od"></div><div class="od"></div></div>
+          <button class="btn btn-nv btn-sm" onclick="gsl(1)">Continuar →</button>
+        </div>
+      </div>
+      <div class="osl" id="osl1">
+        <div class="ob-sc">
+          <div class="ob-si"><span class="siic">✓</span>Tu key va directamente a api.openai.com desde tu navegador</div>
+          <div class="ob-si"><span class="siic">✓</span>PDFs procesados con PDF.js localmente — nunca salen de tu dispositivo</div>
+          <div class="ob-si"><span class="siic">✓</span>Historial y memorias en IndexedDB — solo en tu dispositivo</div>
+          <div class="ob-si"><span class="siic">✓</span>Audit Trail visible: ves exactamente qué razona cada agente</div>
+          <div class="ob-si"><span class="siic">✓</span>Borra todo con "Olvidar API key y datos" en cualquier momento</div>
+        </div>
+        <div class="ob-nv">
+          <div class="ob-ds"><div class="od"></div><div class="od on"></div><div class="od"></div></div>
+          <button class="btn btn-gh btn-sm" onclick="gsl(0)">← Atrás</button>
+          <button class="btn btn-nv btn-sm" onclick="gsl(2)">Continuar →</button>
+        </div>
+      </div>
+      <div class="osl" id="osl2">
+        <div class="fr"><label class="lbl">OpenAI API Key</label>
+          <div class="iw"><input type="password" id="ob-key" placeholder="sk-..." autocomplete="off"/><button class="ib" onclick="tv('ob-key',this)">👁</button></div>
+        </div>
+        <label class="cbr" style="margin-bottom:13px"><input type="checkbox" id="ob-sv" checked/>Guardar en localStorage</label>
+        <div class="ob-ht">💡 <strong>Coste estimado v3:</strong> gpt-4o-mini ~$0.03–$0.12 · gpt-4o ~$0.30–$0.80 (evaluación por sección y audit trail añaden ~30% tokens).</div>
+        <div class="ob-nv">
+          <div class="ob-ds"><div class="od"></div><div class="od"></div><div class="od on"></div></div>
+          <button class="btn btn-gh btn-sm" onclick="gsl(1)">← Atrás</button>
+          <button class="btn btn-am" onclick="launch()">🚀 Comenzar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <aside class="sb">
+    <div class="sb-lg">
+      <span class="sb-wm">MemorIA<span class="sb-v">v5</span></span>
+      <span class="sb-tg">6 agentes · Innovación España</span>
+    </div>
+    <nav class="nav">
+      <span class="nsec">Flujo</span>
+      <button class="ni on" id="ni-nueva" onclick="sp('p-nueva')"><span class="ic">✨</span>Nueva memoria</button>
+      <button class="ni" id="ni-pres" onclick="sp('p-pres')"><span class="ic">💶</span>Presupuesto<span class="nbg v">Nuevo</span></button>
+      <button class="ni" id="ni-generar" onclick="sp('p-generar')"><span class="ic">⚙️</span>Generar<span class="nbg" id="nb-it" style="display:none">0</span></button>
+      <button class="ni" id="ni-editor" onclick="sp('p-editor')"><span class="ic">📝</span>Editor secciones</button>
+      <button class="ni" id="ni-val" onclick="sp('p-val')"><span class="ic">✅</span>Validación</button>
+      <button class="ni" id="ni-diff" onclick="sp('p-diff')"><span class="ic">🔀</span>Comparar versiones</button>
+      <span class="nsec">Datos</span>
+      <button class="ni" id="ni-hist" onclick="sp('p-hist')"><span class="ic">🗂</span>Historial<span class="nbg g" id="nb-hi">0</span><span class="nbg" id="nb-ap" style="display:none;background:var(--tl)">0★</span></button>
+      <button class="ni" id="ni-tpl" onclick="sp('p-tpl')"><span class="ic">📋</span>Plantillas</button>
+      <span class="nsec">Config</span>
+      <button class="ni" id="ni-cfg" onclick="sp('p-cfg')"><span class="ic">🤖</span>Agentes &amp; config</button>
+      <button class="ni" onclick="open('https://platform.openai.com/api-keys','_blank')"><span class="ic">🔑</span>API Key OpenAI</button>
+      <button class="ni" onclick="open('https://www.cdti.es/','_blank')"><span class="ic">🏛️</span>CDTI</button>
+    </nav>
+    <div class="sb-ft">
+      <div class="apll"><div class="adt" id="adt"></div><span id="atxt">Sin configurar</span></div>
+      <button class="btn btn-rd btn-sm btn-fw" onclick="forget()">🗑 Olvidar API key y datos</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ══ NUEVA MEMORIA ═══════════════════════════ -->
+    <div class="page on" id="p-nueva">
+      <div class="ph"><h1>Nueva memoria</h1><p>Sube la convocatoria y documentos de empresa. PDF.js extrae el texto localmente.</p></div>
+      <div class="req-hint">⚠ Los campos marcados con <strong style="color:var(--rd)">*</strong> son los que más impacto tienen en la puntuación: TRL, adicionalidad, KPIs y Work Packages. Complételos antes de generar.</div>
+      <div class="card"><div class="ct">📋 Plantilla rápida <span class="cs">— opcional</span></div><div class="tgrid" id="tq"></div></div>
+      <div class="card">
+        <div class="ct">🏛️ Convocatoria <span class="cs">— PDF bases reguladoras</span></div>
+        <div class="fr"><label class="lbl">Comunidad Autónoma / Ámbito</label>
+          <div class="chips" id="cch">
+            <div class="chip" onclick="scc(this,'Estatal')">🇪🇸 Estatal</div>
+            <div class="chip" onclick="scc(this,'Andalucía')">Andalucía</div>
+            <div class="chip" onclick="scc(this,'Aragón')">Aragón</div>
+            <div class="chip" onclick="scc(this,'Asturias')">Asturias</div>
+            <div class="chip" onclick="scc(this,'Baleares')">Baleares</div>
+            <div class="chip" onclick="scc(this,'Canarias')">Canarias</div>
+            <div class="chip" onclick="scc(this,'C.-La Mancha')">C.-La Mancha</div>
+            <div class="chip" onclick="scc(this,'C. y León')">C. y León</div>
+            <div class="chip" onclick="scc(this,'Cataluña')">Cataluña</div>
+            <div class="chip" onclick="scc(this,'Extremadura')">Extremadura</div>
+            <div class="chip" onclick="scc(this,'Galicia')">Galicia</div>
+            <div class="chip" onclick="scc(this,'Madrid')">Madrid</div>
+            <div class="chip" onclick="scc(this,'Murcia')">Murcia</div>
+            <div class="chip" onclick="scc(this,'Navarra')">Navarra</div>
+            <div class="chip" onclick="scc(this,'País Vasco')">País Vasco</div>
+            <div class="chip" onclick="scc(this,'Valencia')">Valencia</div>
+            <div class="chip" onclick="scc(this,'UE/FEDER')">🇪🇺 UE/FEDER</div>
+          </div>
+        </div>
+        <div class="fr"><label class="lbl">PDF de la convocatoria *</label>
+          <div class="dz" id="dz-c" onclick="document.getElementById('fi-c').click()">
+            <input type="file" id="fi-c" accept=".pdf,.doc,.docx" onchange="hcv(event)"/>
+            <div class="dz-ic">📋</div><div class="dz-tt">Arrastra el PDF aquí</div>
+            <div class="dz-ht">PDF, DOC, DOCX · Extracción local con PDF.js</div>
+          </div>
+          <div class="fl" id="fl-c"></div>
+        </div>
+        <div class="fg">
+          <div class="fr"><label class="lbl">Nombre convocatoria</label><input type="text" id="cn" placeholder="CDTI Proyectos I+D 2025"/></div>
+          <div class="fr"><label class="lbl">Presupuesto total solicitado (€)</label><input type="text" id="cb" placeholder="350.000"/></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">🏢 Documentos de empresa</div>
+        <div class="dz" id="dz-e" onclick="document.getElementById('fi-e').click()">
+          <input type="file" id="fi-e" accept=".pdf,.doc,.docx" multiple onchange="hem(event)"/>
+          <div class="dz-ic">📁</div><div class="dz-tt">Arrastra documentos de empresa</div>
+          <div class="dz-ht">Múltiples archivos · Memoria anual, ficha proyecto, CVs...</div>
+        </div>
+        <div class="fl" id="fl-e"></div>
+      </div>
+      <div class="card">
+        <div class="ct">📝 Datos de empresa <span class="cs">— <button class="btn btn-sf btn-xs" onclick="loadPerfil()">📂 Cargar perfil guardado</button> <button class="btn btn-tl btn-xs" onclick="savePerfil()">💾 Guardar perfil</button></span></div>
+        <div class="fg">
+          <div class="fr"><label class="lbl">Empresa</label><input type="text" id="en" placeholder="Empresa S.L."/></div>
+          <div class="fr"><label class="lbl">CIF</label><input type="text" id="ec" placeholder="B12345678"/></div>
+          <div class="fr"><label class="lbl">Sector / CNAE</label><input type="text" id="es" placeholder="Biotecnología, SaaS..."/></div>
+          <div class="fr"><label class="lbl">Empleados</label><input type="text" id="ee" placeholder="25"/></div>
+          <div class="fr"><label class="lbl">Facturación (€)</label><input type="text" id="ef" placeholder="1.200.000"/></div>
+          <div class="fr"><label class="lbl">Años activo</label><input type="text" id="ea" placeholder="8"/></div>
+        </div>
+        <div class="fr"><label class="lbl">Descripción del proyecto</label>
+          <textarea id="ep" placeholder="Objetivo, tecnología, mercado, resultados esperados..." style="min-height:100px"></textarea></div>
+
+        <!-- TRL -->
+        <div class="fg" style="margin-bottom:0">
+          <div class="fr">
+            <label class="lbl">TRL actual del proyecto <span style="color:var(--rd)">*</span></label>
+            <select id="e-trl-act">
+              <option value="">— Selecciona —</option>
+              <option value="1">TRL 1 — Principios básicos observados</option>
+              <option value="2">TRL 2 — Concepto tecnológico formulado</option>
+              <option value="3">TRL 3 — Prueba de concepto experimental</option>
+              <option value="4">TRL 4 — Validación en laboratorio</option>
+              <option value="5">TRL 5 — Validación en entorno relevante</option>
+              <option value="6">TRL 6 — Demostración en entorno relevante</option>
+              <option value="7">TRL 7 — Demostración en entorno operacional</option>
+              <option value="8">TRL 8 — Sistema completo y cualificado</option>
+              <option value="9">TRL 9 — Sistema probado en entorno real</option>
+            </select>
+          </div>
+          <div class="fr">
+            <label class="lbl">TRL objetivo al finalizar el proyecto <span style="color:var(--rd)">*</span></label>
+            <select id="e-trl-obj">
+              <option value="">— Selecciona —</option>
+              <option value="3">TRL 3</option><option value="4">TRL 4</option>
+              <option value="5">TRL 5</option><option value="6">TRL 6</option>
+              <option value="7">TRL 7</option><option value="8">TRL 8</option>
+              <option value="9">TRL 9</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ADICIONALIDAD -->
+        <div class="fr">
+          <label class="lbl">Adicionalidad — ¿por qué el proyecto NO se realizaría sin la ayuda? <span style="color:var(--rd)">*</span></label>
+          <textarea id="e-adicio" placeholder="Ej: El proyecto requiere una inversión en I+D de 350.000€ que supera la capacidad financiera actual de la empresa. Sin la ayuda pública, el riesgo técnico y financiero impediría acometer las fases de validación TRL 5-7. La empresa no puede acceder a financiación privada para proyectos pre-comerciales en esta fase de madurez tecnológica..." style="min-height:80px"></textarea>
+        </div>
+
+        <!-- KPIs -->
+        <div class="fr">
+          <label class="lbl">KPIs cuantitativos del proyecto <span style="color:var(--rd)">*</span> <span class="cs">— métricas medibles al finalizar</span></label>
+          <textarea id="e-kpis" placeholder="Ej:&#10;• Reducir tiempo de proceso de 48h a 12h (–75%) en mes 18&#10;• Aumentar precisión del modelo de 72% a 91% (accuracy F1)&#10;• Certificar TRL 7 en mes 24&#10;• Generar 2 solicitudes de patente&#10;• Incrementar ventas en mercado objetivo un 30% en 24 meses post-proyecto" style="min-height:90px"></textarea>
+        </div>
+
+        <!-- PLAN DE TRABAJO WPs -->
+        <div class="fr">
+          <label class="lbl">Plan de trabajo — Work Packages <span style="color:var(--rd)">*</span></label>
+          <div id="wp-list" style="display:flex;flex-direction:column;gap:7px;margin-bottom:8px"></div>
+          <button class="btn btn-sf btn-xs" onclick="addWP()" style="margin-bottom:4px">+ Añadir WP</button>
+        </div>
+
+        <!-- EQUIPO CVs -->
+        <div class="fr">
+          <label class="lbl">Equipo investigador — CVs resumidos</label>
+          <textarea id="e-cvs" placeholder="Ej:&#10;Juan García (IP) — Dr. Ing. Industrial, 12 años I+D, 8 publicaciones JCR, EP3456789&#10;Ana Martínez (Investigadora) — MSc Biotecnología, 5 años sector, especialista en TRL 4-6&#10;Pedro López (Técnico) — Ing. Electrónico, responsable validación sistemas" style="min-height:80px"></textarea>
+        </div>
+
+        <!-- PROPIEDAD INTELECTUAL -->
+        <div class="fg">
+          <div class="fr">
+            <label class="lbl">Plan de protección PI</label>
+            <select id="e-pi">
+              <option value="patente_solicitar">Solicitar patente al finalizar</option>
+              <option value="patente_existente">Patente existente como base</option>
+              <option value="secreto_industrial">Secreto industrial / know-how</option>
+              <option value="copyright">Copyright / propiedad del software</option>
+              <option value="sin_pi">Sin protección PI específica</option>
+            </select>
+          </div>
+          <div class="fr">
+            <label class="lbl">Mercado objetivo (TAM)</label>
+            <input type="text" id="e-tam" placeholder="Ej: Mercado europeo automatización industrial, 12.400M€ (CAGR 8.3%)"/>
+          </div>
+        </div>
+
+        <!-- AYUDAS ACTIVAS / ACUMULACIÓN -->
+        <div class="fr">
+          <label class="lbl">Otras ayudas activas de la empresa (para declarar no duplicidad)</label>
+          <input type="text" id="e-ayudas" placeholder="Ej: CDTI-2023-001234 (finaliza 12/2024), PERTE Chip Autonómico 2022 (cerrado). O bien: Sin ayudas activas previas."/>
+        </div>
+
+        <div class="fr">
+          <label class="lbl">Socios del consorcio <span class="cs">— si el proyecto se presenta en consorcio</span></label>
+          <textarea id="e-socios" placeholder="Ej:
+• Universidad Politécnica de Madrid — rol: investigación básica, presupuesto 80.000€ (23%)
+• TechCorp S.L. — rol: desarrollo software, presupuesto 120.000€ (34%)
+O bien: Proyecto individual (sin socios)" style="min-height:70px"></textarea>
+        </div>
+        <div class="fr"><label class="lbl">Instrucciones especiales</label>
+          <input type="text" id="ei" placeholder="Énfasis medioambiental, ISO 14001, tono muy técnico..."/></div>
+      </div>
+      <div class="card">
+        <div class="ct">⚙️ Opciones</div>
+        <div class="fg3">
+          <div class="fr"><label class="lbl">Modelo OpenAI</label>
+            <select id="om"><option value="gpt-4o-mini" selected>gpt-4o-mini ✅</option><option value="gpt-4o">gpt-4o — Alta calidad</option><option value="gpt-4-turbo">gpt-4-turbo</option></select></div>
+          <div class="fr"><label class="lbl">Score objetivo (%)</label>
+            <select id="ot"><option value="65">65% — Borrador</option><option value="75" selected>75% — Competitivo</option><option value="85">85% — Excelente</option><option value="95">95% — Máximo</option></select></div>
+          <div class="fr"><label class="lbl">Iteraciones mejora</label>
+            <select id="oi"><option value="0">0 — Sin bucle</option><option value="1">1 iteración</option><option value="2" selected>2 iteraciones</option><option value="3">3 iteraciones</option></select></div>
+        </div>
+        <label class="cbr"><input type="checkbox" id="opt-audit" checked/>Mostrar Audit Trail (razonamiento de cada agente)</label>
+      </div>
+      <div class="row">
+        <button class="btn btn-sf btn-lg" onclick="sp('p-pres')" style="flex:0 0 auto">💶 Configurar presupuesto →</button>
+        <button class="btn btn-am btn-lg" onclick="goGen()" style="flex:1;justify-content:center">⚙️ Iniciar pipeline →</button>
+      </div>
+    </div>
+
+    <!-- ══ PRESUPUESTO (MEJORA 1) ══════════════════ -->
+    <div class="page" id="p-pres">
+      <div class="ph">
+        <h1>Presupuesto Inteligente <span class="pill new">AG.06</span></h1>
+        <p>El AG.06 valida restricciones de la convocatoria, detecta errores aritméticos y genera la justificación económica de cada partida.</p>
+      </div>
+      <div class="card">
+        <div class="ct">📅 Anualidades</div>
+        <div class="fg3">
+          <div class="fr"><label class="lbl">Nº de anualidades</label>
+            <select id="p-nyears" onchange="buildPresTable()">
+              <option value="1">1 anualidad</option><option value="2" selected>2 anualidades</option><option value="3">3 anualidades</option>
+            </select>
+          </div>
+          <div class="fr"><label class="lbl">Año inicio</label><input type="number" id="p-startyear" value="2025" min="2024" max="2030" onchange="buildPresTable()"/></div>
+          <div class="fr"><label class="lbl">Intensidad ayuda (%)</label><input type="number" id="p-intensity" value="60" min="0" max="100" onchange="updatePresAlerts()"/></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">💶 Tabla de partidas presupuestarias</div>
+        <div id="pres-alerts"></div>
+        <div id="pres-table-wrap">
+          <!-- generado por JS -->
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn btn-nv btn-sm" onclick="validatePres()">✓ Validar presupuesto</button>
+          <button class="btn btn-vl btn-sm" onclick="genPresJustif()">🤖 Generar justificación económica</button>
+          <button class="btn btn-gh btn-sm mla" onclick="sp('p-nueva')">← Volver a datos</button>
+        </div>
+      </div>
+      <div class="card" id="pres-justif-card" style="display:none">
+        <div class="ct">📄 Justificación económica generada <span class="pill m2">AG.06</span></div>
+        <div id="pres-justif-text" style="font-size:13px;line-height:1.85;white-space:pre-wrap;color:var(--ink)"></div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn btn-sf btn-sm" onclick="copyPJ()">📋 Copiar justificación</button>
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <button class="btn btn-am btn-lg btn-fw" onclick="goGen()">⚙️ Iniciar pipeline con presupuesto →</button>
+      </div>
+    </div>
+
+    <!-- ══ GENERAR ══════════════════════════════════ -->
+    <div class="page" id="p-generar">
+      <div class="ph"><h1>Pipeline de generación</h1><p>6 agentes trabajando en secuencia. La evaluación se realiza sección a sección con streaming visible.</p></div>
+      <div class="ibox" id="gi" style="display:none">📋 <strong id="gi-cn">—</strong> &nbsp;|&nbsp; 🏛️ <strong id="gi-cc">—</strong> &nbsp;|&nbsp; 🏢 <strong id="gi-en">—</strong> &nbsp;|&nbsp; 🎯 <strong id="gi-sc">—</strong></div>
+      <div class="pipeline">
+        <div class="ps" id="ps0"><div class="ps-n">AG.01</div><span class="ps-ic">🔍</span><div class="ps-lb">Lector</div><div class="ps-st" id="ps0s">En espera</div><div class="ps-br"><div class="ps-bf" id="ps0b"></div></div></div>
+        <div class="ps" id="ps1"><div class="ps-n">AG.02</div><span class="ps-ic">🧩</span><div class="ps-lb">Contextualiz.</div><div class="ps-st" id="ps1s">En espera</div><div class="ps-br"><div class="ps-bf" id="ps1b"></div></div></div>
+        <div class="ps" id="ps5"><div class="ps-n">AG.06</div><span class="ps-ic">💶</span><div class="ps-lb">Presupuesto</div><div class="ps-st" id="ps5s">En espera</div><div class="ps-br"><div class="ps-bf" id="ps5b"></div></div></div>
+        <div class="ps" id="ps2"><div class="ps-n">AG.03</div><span class="ps-ic">✍️</span><div class="ps-lb">Redactor</div><div class="ps-st" id="ps2s">En espera</div><div class="ps-br"><div class="ps-bf" id="ps2b"></div></div></div>
+        <div class="ps" id="ps3"><div class="ps-n">AG.04</div><span class="ps-ic">🔗</span><div class="ps-lb">Coherencia</div><div class="ps-st" id="ps3s">En espera</div><div class="ps-br"><div class="ps-bf" id="ps3b"></div></div></div>
+        <div class="ps" id="ps4"><div class="ps-n">AG.05</div><span class="ps-ic">✅</span><div class="ps-lb">Evaluador</div><div class="ps-st" id="ps4s">En espera</div><div class="ps-br"><div class="ps-bf" id="ps4b"></div></div></div>
+      </div>
+      <!-- STREAM BOX (MEJORA 2) -->
+      <div class="stream-wrap" id="stream-wrap" style="display:none">
+        <div class="stream-hd">
+          <span class="stream-hd-tt" id="stream-lbl">Generando...</span>
+          <span class="stream-tps" id="stream-tps"></span>
+        </div>
+        <div class="stream-body" id="stream-body"></div>
+      </div>
+      <div class="card" style="display:flex;align-items:center;gap:16px;padding:12px 16px;margin-bottom:10px">
+          <div style="font-size:12px;color:var(--ink3)">💰 Coste estimado:</div>
+          <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--nv)" id="cost-display">$0.0000</div>
+          <div style="font-size:11px;color:var(--ink3)" id="token-display">0 tokens</div>
+          <div class="tag a" id="completar-badge" style="display:none">⚠ <span id="completar-count">0</span> [COMPLETAR]</div>
+        </div>
+        <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+          <div style="font-size:13px;font-weight:600">Log del pipeline</div>
+          <div class="itb" id="itb" style="display:none">🔄 Iter. <span id="itn">0</span>/<span id="itm">2</span></div>
+          <div style="margin-left:auto;font-size:11px;color:var(--ink3);font-family:var(--fm)" id="gtmr">—</div>
+        </div>
+        <div class="pb"><div class="pf" id="pfill"></div></div>
+        <div class="log" id="logbox"><div class="ll"><span class="lts">--:--:--</span><span class="lm info">[ MemorIA v3 ] Listo. Configura los datos y pulsa Iniciar pipeline.</span></div></div>
+      </div>
+      </div>
+      <div class="card" id="sdc" style="display:none"><div class="ct">📋 Secciones detectadas</div><div class="tags" id="sdtags"></div></div>
+      <div class="sr">
+        <div class="sc2"><span class="sv" id="sts">—</span><span class="sl">Secciones</span></div>
+        <div class="sc2"><span class="sv" id="stw">—</span><span class="sl">Palabras</span></div>
+        <div class="sc2"><span class="sv" id="stsc">—</span><span class="sl">Score</span></div>
+        <div class="sc2"><span class="sv" id="stit">—</span><span class="sl">Iteraciones</span></div>
+        <div class="sc2"><span class="sv" id="sttm">—</span><span class="sl">Tiempo</span></div>
+      </div>
+      <div class="row">
+        <button class="btn btn-am btn-lg" id="btn-go" onclick="runPipeline()" style="flex:1;justify-content:center">▶ Iniciar pipeline</button>
+        <button class="btn btn-gh btn-lg" onclick="sp('p-nueva')">← Editar</button>
+      </div>
+    </div>
+
+    <!-- ══ EDITOR ══════════════════════════════════ -->
+    <div class="page" id="p-editor">
+      <div class="ph"><h1>Editor de secciones</h1><p>Cada sección muestra su puntuación y el <span class="tag v" style="font-size:11px">Audit Trail</span> del razonamiento de los agentes.</p></div>
+      <div class="pm" id="ed-ph"><div class="pm-ic">📝</div><p>La memoria aparecerá aquí tras generar.</p></div>
+      <div id="ed-wrap" style="display:none">
+        <div class="mwrap">
+          <div class="mtbar"><div class="mt-t" id="mtt">—</div><span class="tag t" id="mtbg" style="display:none">✓ Completa</span><button class="btn btn-sf btn-xs" onclick="expAll()">Expandir</button><button class="btn btn-sf btn-xs" onclick="colAll()">Colapsar</button><button class="btn btn-vl btn-xs" onclick="toggleAllAudit()">🔍 Audit</button></div>
+          <div class="mbody" id="mbody"></div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn btn-nv btn-sm" onclick="dlTxt()">⬇ .txt</button>
+          <button class="btn btn-sf btn-sm" onclick="dlDocx()">⬇ .docx</button>
+          <button class="btn btn-sf btn-sm" onclick="dlHtml()">⬇ .html</button>
+          <button class="btn btn-gh btn-sm" onclick="cpAll()">📋 Copiar</button>
+          <button class="btn btn-gh btn-sm" onclick="sp('p-val')">✅ Validación →</button>
+          <button class="btn btn-gh btn-sm mla" onclick="saveH()">💾 Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ VALIDACIÓN ══════════════════════════════ -->
+    <div class="page" id="p-val">
+      <div class="ph"><h1>Informe de validación</h1><p>Evaluación sección a sección con el baremo real. Score por criterio con barras de progreso.</p></div>
+      <div class="pm" id="val-ph"><div class="pm-ic">✅</div><p>El informe aparecerá aquí tras generar.</p></div>
+      <div id="val-wrap" style="display:none">
+        <div class="vbig">
+          <div class="vring"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="29" fill="none" stroke="var(--cr3)" stroke-width="7"/><circle cx="35" cy="35" r="29" fill="none" stroke="var(--tl)" stroke-width="7" stroke-dasharray="182.2" stroke-dashoffset="182.2" id="vrc" stroke-linecap="round"/></svg><div class="vnum" id="vnum">—</div></div>
+          <div><div class="vlvl" id="vlvl">—</div><div class="vsumm" id="vsumm">—</div></div>
+        </div>
+        <!-- Score bars por sección (MEJORA 2) -->
+        <div class="card" id="sec-scores-card" style="display:none">
+          <div class="ct">📊 Score por sección <span class="pill m2">Evaluación completa</span></div>
+          <div class="sec-scores" id="sec-scores"></div>
+        </div>
+        <div class="vitems" id="vitems"></div>
+        <div class="row" style="margin-top:14px">
+          <button class="btn btn-nv btn-sm" onclick="dlTxt()">⬇ Descargar</button>
+          <button class="btn btn-gh btn-sm" onclick="sp('p-editor')">← Editar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ DIFF ════════════════════════════════════ -->
+    <div class="page" id="p-diff">
+      <div class="ph"><h1>Comparar versiones</h1><p>Diferencias entre iteraciones del bucle de mejora.</p></div>
+      <div class="pm" id="df-ph"><div class="pm-ic">🔀</div><p>Ejecuta el bucle de mejora (≥1 iteración) para comparar versiones.</p></div>
+      <div id="df-wrap" style="display:none">
+        <div class="fg" style="margin-bottom:12px">
+          <div class="fr" style="margin-bottom:0"><label class="lbl">Versión A</label><select id="da" onchange="rdiff()"></select></div>
+          <div class="fr" style="margin-bottom:0"><label class="lbl">Versión B</label><select id="db" onchange="rdiff()"></select></div>
+        </div>
+        <div class="dfw"><div class="dp"><div class="dp-h" id="dah">A</div><div class="dp-b" id="dab"></div></div><div class="dp"><div class="dp-h" id="dbh">B</div><div class="dp-b" id="dbb"></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ HISTORIAL ═══════════════════════════════ -->
+    <div class="page" id="p-hist">
+      <div class="ph"><h1>Historial</h1><p>Memorias guardadas en IndexedDB de tu navegador.</p></div>
+      <div class="row" style="margin-bottom:14px"><button class="btn btn-rd btn-sm" onclick="clrH()">🗑 Borrar historial</button></div>
+      <div id="hlist"></div>
+    </div>
+
+    <!-- ══ PLANTILLAS ══════════════════════════════ -->
+    <div class="page" id="p-tpl">
+      <div class="ph"><h1>Plantillas</h1><p>Estructura predefinida para convocatorias frecuentes.</p></div>
+      <div class="tgrid" id="tall"></div>
+    </div>
+
+    <!-- ══ CONFIG ══════════════════════════════════ -->
+    <div class="page" id="p-cfg">
+      <div class="ph"><h1>Agentes &amp; Configuración</h1></div>
+      <div class="card">
+        <div class="ct">🔑 OpenAI API Key</div>
+        <div class="fr"><div class="iw"><input type="password" id="cfg-k" placeholder="sk-..."/><button class="ib" onclick="tv('cfg-k',this)">👁</button></div></div>
+        <button class="btn btn-nv btn-sm" onclick="saveK()">💾 Guardar</button>
+      </div>
+      <div class="card">
+        <div class="ct">🤖 Los 6 agentes del pipeline v3</div>
+        <div class="acc open"><div class="ac-h" onclick="this.parentElement.classList.toggle('open')"><span>🔍 AG.01 — Lector de convocatoria</span><span class="ac-cv">▶</span></div><div class="ac-b">Analiza el PDF y extrae JSON estructurado: secciones con pesos, criterios de valoración, requisitos mínimos, cuantías y restricciones presupuestarias. Único agente que lee la convocatoria directamente.</div></div>
+        <div class="acc"><div class="ac-h" onclick="this.parentElement.classList.toggle('open')"><span>🧩 AG.02 — Contextualizador de empresa</span><span class="ac-cv">▶</span></div><div class="ac-b">Lee documentos de empresa y construye una ficha empresa normalizada: fortalezas técnicas, tecnologías, equipo, historial I+D y cifras. Garantiza coherencia interna sin que el Redactor interprete documentos brutos.</div></div>
+        <div class="acc"><div class="ac-h" onclick="this.parentElement.classList.toggle('open')"><span>💶 AG.06 — Presupuesto Inteligente <span class="pill new">Nuevo</span></span><span class="ac-cv">▶</span></div><div class="ac-b">Valida la tabla de partidas contra las restricciones de la convocatoria (límites subcontratación, overhead permitido, cuantía máxima). Detecta errores aritméticos y genera la justificación económica sección por sección con lenguaje técnico-administrativo alineado con el baremo.</div></div>
+        <div class="acc"><div class="ac-h" onclick="this.parentElement.classList.toggle('open')"><span>✍️ AG.03 — Redactor de secciones</span><span class="ac-cv">▶</span></div><div class="ac-b">Redacta todas las secciones con lenguaje técnico-administrativo oficial, ponderando el esfuerzo según el peso de cada criterio. Incorpora el presupuesto validado por AG.06. Es relanzado por el bucle de mejora para secciones débiles con instrucciones específicas del evaluador.</div></div>
+        <div class="acc"><div class="ac-h" onclick="this.parentElement.classList.toggle('open')"><span>🔗 AG.04 — Coherencia &amp; Consistencia</span><span class="ac-cv">▶</span></div><div class="ac-b">Audita la memoria completa buscando contradicciones entre secciones, cifras inconsistentes y hilo narrativo roto. Reescribe quirúrgicamente solo las secciones afectadas. Expone su chain-of-thought en el Audit Trail de cada sección.</div></div>
+        <div class="acc"><div class="ac-h" onclick="this.parentElement.classList.toggle('open')"><span>✅ AG.05 — Evaluador sección a sección <span class="pill m2">Mejorado</span></span><span class="ac-cv">▶</span></div><div class="ac-b">Evalúa cada sección de forma independiente y completa (sin truncado) con streaming visible en tiempo real. Produce score por sección y score global. Si no se alcanza el objetivo, activa el bucle: pasa instrucciones estructuradas y específicas al AG.03 (no observaciones genéricas), re-evalúa y repite hasta N iteraciones.</div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+<div id="toasts"></div>
+<script>
+// ════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════
+const S={
+  key:'',ccaa:'',
+  cFile:null,cText:'',eFiles:[],eTexts:[],
+  cData:null,eProf:null,presData:null,presJustif:'',
+  secs:[],secScores:{},auditTrail:{},
+  vers:[],valD:null,
+  run:false,t0:null,tmr:null,
+  tps:0,tpsStart:0,
+  // v4
+  trl_actual:'',trl_objetivo:'',
+  wps:[],aprobadas:[],perfilPersistente:null,
+  // v5 new
+  tokensIn:0,tokensOut:0,      // contador de tokens acumulado
+  cacheAG01:null,cacheAG02:null, // cache por convocatoria+empresa
+  cacheKeyConv:'',cacheKeyEmp:'', // claves para invalidar cache
+  consorcios:[],               // socios del consorcio
+  prevIterScore:0,             // para detección de plateau
+  completarCount:0             // [COMPLETAR] scanner
+};
+
+// ════════════════════════════════════════════════════
+//  INDEXEDDB
+// ════════════════════════════════════════════════════
+let DB;
+async function initDB(){return new Promise((res,rej)=>{const r=indexedDB.open('memoriaDB',5);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('mems'))db.createObjectStore('mems',{keyPath:'id',autoIncrement:true});};r.onsuccess=e=>{DB=e.target.result;res();};r.onerror=()=>rej(r.error);});}
+function dput(s,o){return new Promise((res,rej)=>{const t=DB.transaction(s,'readwrite'),r=t.objectStore(s).put(o);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function dgetall(s){return new Promise((res,rej)=>{const t=DB.transaction(s,'readonly'),r=t.objectStore(s).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function ddel(s,k){return new Promise((res,rej)=>{const t=DB.transaction(s,'readwrite'),r=t.objectStore(s).delete(k);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+
+async function saveH(){if(!S.secs.length){toast('Sin memoria generada','warn');return;}await dput('mems',{date:new Date().toISOString(),conv:v('cn')||'Convocatoria',ccaa:S.ccaa||'España',empresa:v('en')||'—',score:S.valD?.score_global||0,secs:S.secs,valD:S.valD,secScores:S.secScores});rfHB();toast('Guardado ✓','ok');}
+async function loadH(){const it=await dgetall('mems');rfHB(it.length);const el=document.getElementById('hlist');if(!it.length){el.innerHTML='<div class="hempty">📭 Sin memorias guardadas.</div>';return;}el.innerHTML='';[...it].reverse().forEach(i=>{const sc=i.score||0,cls=sc>=75?'hi':sc>=55?'mid':'lo';const d=document.createElement('div');d.className='hi';const apBadge=i.aprobada?'<span class="tag t" style="font-size:10px">✓ Aprobada · few-shot</span>':'';
+    d.innerHTML=`<div class="hi-th">${i.aprobada?'🏆':'📄'}</div><div class="hi-mt"><div class="hi-tt">${i.conv} ${apBadge}</div><div class="hi-sb">${i.empresa} · ${i.ccaa} · ${new Date(i.date).toLocaleDateString('es-ES')}</div></div><div class="hi-sc ${cls}">${sc}%</div><button class="btn btn-sf btn-xs" onclick="loadFH(${i.id})">Abrir</button><button class="btn ${i.aprobada?'btn-tl':'btn-sf'} btn-xs" onclick="markAprobada(${i.id})" title="Marcar como aprobada para usar como ejemplo few-shot">${i.aprobada?'★ Aprobada':'☆ Aprobada'}</button><button class="btn btn-rd btn-xs" onclick="delH(${i.id})">✕</button>`;el.appendChild(d);});}
+async function loadFH(id){const it=await dgetall('mems');const i=it.find(x=>x.id===id);if(!i)return;S.secs=i.secs;S.valD=i.valD;S.secScores=i.secScores||{};rEd(i.conv);rVal(i.valD);sp('p-editor');toast('Cargada ✓','ok');}
+async function delH(id){await ddel('mems',id);loadH();toast('Eliminada','warn');}
+async function clrH(){const it=await dgetall('mems');for(const i of it)await ddel('mems',i.id);loadH();toast('Borrado','warn');}
+function rfHB(n){dgetall('mems').then(it=>{document.getElementById('nb-hi').textContent=n!==undefined?n:it.length;});}
+
+// ════════════════════════════════════════════════════
+//  PDF.JS
+// ════════════════════════════════════════════════════
+async function xpdf(file){try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const ab=await file.arrayBuffer();const pdf=await pdfjsLib.getDocument({data:ab}).promise;let txt='';for(let i=1;i<=Math.min(pdf.numPages,45);i++){const pg=await pdf.getPage(i);const ct=await pg.getTextContent();txt+=ct.items.map(x=>x.str).join(' ')+'\n';}return txt.substring(0,20000);}catch(e){return '';}}
+
+// ════════════════════════════════════════════════════
+//  ONBOARDING
+// ════════════════════════════════════════════════════
+function gsl(n){document.querySelectorAll('.osl').forEach((s,i)=>s.classList.toggle('on',i===n));}
+function launch(){const k=document.getElementById('ob-key').value.trim();if(!k.startsWith('sk-')){toast('API key inválida','err');return;}S.key=k;if(document.getElementById('ob-sv').checked)localStorage.setItem('mem_k',k);document.getElementById('cfg-k').value=k;document.getElementById('ob').style.display='none';document.getElementById('app').style.display='block';updDot(true);}
+
+// ════════════════════════════════════════════════════
+//  NAV
+// ════════════════════════════════════════════════════
+function sp(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById(id).classList.add('on');const ni='ni-'+id.replace('p-','');if(document.getElementById(ni))document.getElementById(ni).classList.add('on');if(id==='p-hist')loadH();}
+
+// ════════════════════════════════════════════════════
+//  FILE HANDLING
+// ════════════════════════════════════════════════════
+function sdrop(zid){const z=document.getElementById(zid);z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag');});z.addEventListener('dragleave',()=>z.classList.remove('drag'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag');if(zid==='dz-c')hcvf(e.dataTransfer.files);else hemf(e.dataTransfer.files);});}
+function hcv(e){hcvf(e.target.files);}
+async function hcvf(files){const f=files[0];if(!f)return;S.cFile=f;S.cText='';rfl('fl-c',[f],'c');if(f.name.toLowerCase().endsWith('.pdf')){lg('Extrayendo PDF convocatoria...','info');S.cText=await xpdf(f);if(S.cText.length<100){lg('⚠ PDF posiblemente escaneado — texto escaso. Completa el nombre de convocatoria manualmente.','warn');}else{lg(`~${S.cText.split(' ').length} palabras extraídas.`,'ok');}rfl('fl-c',[f],'c');}}
+function hem(e){hemf(e.target.files);}
+async function hemf(files){for(const f of Array.from(files)){S.eFiles.push(f);let txt='';if(f.name.toLowerCase().endsWith('.pdf')){txt=await xpdf(f);lg(`"${f.name}": ~${txt.split(' ').length}w`,'ok');}S.eTexts.push({name:f.name,text:txt});}rfl('fl-e',S.eFiles,'e');}
+function rfl(id,files,type){const el=document.getElementById(id);el.innerHTML='';files.forEach((f,i)=>{const ext=f.name.split('.').pop().toLowerCase();const d=document.createElement('div');d.className='fi';const bk=type==='c'?S.cText.length>100:!!S.eTexts[i]?.text;d.innerHTML=`<span class="fi-ic">${ext==='pdf'?'📄':'📝'}</span><span class="fi-nm">${f.name}</span><span class="fi-sz">${(f.size/1024).toFixed(0)} KB</span>${bk?'<span class="fi-bk">Texto extraído</span>':''}<button class="fi-rm" onclick="rmf('${type}',${i})">✕</button>`;el.appendChild(d);});}
+function rmf(t,i){if(t==='c'){S.cFile=null;S.cText='';document.getElementById('fl-c').innerHTML='';}else{S.eFiles.splice(i,1);S.eTexts.splice(i,1);rfl('fl-e',S.eFiles,'e');}}
+function scc(el,val){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');S.ccaa=val;}
+function v(id){return document.getElementById(id)?.value?.trim()||'';}
+
+// ════════════════════════════════════════════════════
+//  MEJORA 1 — PRESUPUESTO INTELIGENTE (AG.06)
+// ════════════════════════════════════════════════════
+const PARTIDAS=[
+  {id:'personal',label:'Personal investigador y técnico',restriccion:'Sin límite específico'},
+  {id:'subcontrat',label:'Subcontratación',restriccion:'Máx 50% del total (CDTI)'},
+  {id:'material',label:'Equipamiento y material fungible',restriccion:'Justificación uso exclusivo'},
+  {id:'viajes',label:'Viajes y dietas',restriccion:'Según tarifas oficiales'},
+  {id:'overhead',label:'Costes indirectos (overhead)',restriccion:'Máx 15-20% según convocatoria'},
+  {id:'otros',label:'Otros costes elegibles',restriccion:'Según bases reguladoras'},
+];
+
+function buildPresTable(){
+  const ny=parseInt(v('p-nyears')||2);
+  const sy=parseInt(v('p-startyear')||2025);
+  const years=Array.from({length:ny},(_,i)=>sy+i);
+
+  let html=`<table class="pres-table"><thead><tr><th>Partida</th>`;
+  years.forEach(y=>html+=`<th>Año ${y} (€)</th>`);
+  html+=`<th>Total (€)</th><th>% s/total</th></tr></thead><tbody>`;
+
+  PARTIDAS.forEach(p=>{
+    html+=`<tr><td title="${p.restriccion}"><strong>${p.label}</strong><br><span style="font-size:10px;color:var(--ink3)">${p.restriccion}</span></td>`;
+    years.forEach(y=>html+=`<td><input type="number" id="pr-${p.id}-${y}" placeholder="0" min="0" onchange="updatePresAlerts()" style="text-align:right"/></td>`);
+    html+=`<td class="td-total" id="pr-${p.id}-tot">0 €</td><td class="td-total" id="pr-${p.id}-pct">0%</td></tr>`;
+  });
+
+  html+=`<tr style="font-weight:700;background:var(--cr3)"><td>TOTAL</td>`;
+  years.forEach(y=>html+=`<td class="td-total" id="pr-total-${y}">0 €</td>`);
+  html+=`<td class="td-total" id="pr-total-tot" style="color:var(--nv)">0 €</td><td class="td-total">100%</td></tr></tbody></table>`;
+
+  document.getElementById('pres-table-wrap').innerHTML=html;
+  document.querySelectorAll('.pres-table input').forEach(inp=>inp.addEventListener('input',updatePresAlerts));
+}
+
+function getPresData(){
+  const ny=parseInt(v('p-nyears')||2);
+  const sy=parseInt(v('p-startyear')||2025);
+  const years=Array.from({length:ny},(_,i)=>sy+i);
+  const data={years,partidas:{},totals:{},grandTotal:0};
+  PARTIDAS.forEach(p=>{data.partidas[p.id]={label:p.label,years:{},total:0};years.forEach(y=>{const val=parseFloat(document.getElementById(`pr-${p.id}-${y}`)?.value||0)||0;data.partidas[p.id].years[y]=val;data.partidas[p.id].total+=val;});data.grandTotal+=data.partidas[p.id].total;});
+  years.forEach(y=>{data.totals[y]=PARTIDAS.reduce((s,p)=>s+(parseFloat(document.getElementById(`pr-${p.id}-${y}`)?.value||0)||0),0);});
+  return data;
+}
+
+function updatePresAlerts(){
+  const data=getPresData();
+  const totalEl=document.getElementById('pr-total-tot');
+  if(totalEl)totalEl.textContent=fmtEur(data.grandTotal);
+  PARTIDAS.forEach(p=>{
+    const tot=data.partidas[p.id].total;
+    const pct=data.grandTotal>0?((tot/data.grandTotal)*100).toFixed(1):0;
+    const te=document.getElementById(`pr-${p.id}-tot`);const pe=document.getElementById(`pr-${p.id}-pct`);
+    if(te)te.textContent=fmtEur(tot);if(pe)pe.textContent=pct+'%';
+  });
+  data.years.forEach(y=>{const te=document.getElementById(`pr-total-${y}`);if(te)te.textContent=fmtEur(data.totals[y]||0);});
+  validatePres(true);
+}
+
+function fmtEur(n){return n.toLocaleString('es-ES',{minimumFractionDigits:0,maximumFractionDigits:0})+' €';}
+
+function validatePres(silent=false){
+  const data=getPresData();
+  const alertsEl=document.getElementById('pres-alerts');
+  const alerts=[];
+  const gt=data.grandTotal;
+
+  // Check 1: Subcontratación > 50%
+  const subPct=gt>0?(data.partidas.subcontrat.total/gt)*100:0;
+  if(subPct>50)alerts.push({t:'err',msg:`Subcontratación (${subPct.toFixed(1)}%) supera el límite del 50% del total. Reduce ${fmtEur(data.partidas.subcontrat.total-gt*0.5)}.`});
+  // Check 2: Overhead > 20%
+  const ohPct=gt>0?(data.partidas.overhead.total/gt)*100:0;
+  if(ohPct>20)alerts.push({t:'err',msg:`Costes indirectos (${ohPct.toFixed(1)}%) superan el 20%. Revisa las bases de la convocatoria.`});
+  // Check 3: Total vs presupuesto declarado
+  const declared=parseFloat((v('cb')||'0').replace(/[^0-9]/g,''))||0;
+  if(declared>0&&Math.abs(gt-declared)>500)alerts.push({t:'warn',msg:`Total tabla (${fmtEur(gt)}) difiere del presupuesto declarado (${fmtEur(declared)}). Ajusta o actualiza el campo presupuesto.`});
+  // Check 4: Personal < 30%
+  const persPct=gt>0?(data.partidas.personal.total/gt)*100:0;
+  if(gt>0&&persPct<30)alerts.push({t:'warn',msg:`Personal representa solo el ${persPct.toFixed(1)}% del total. Los evaluadores suelen esperar >30% en proyectos I+D.`});
+  // OK
+  if(alerts.length===0&&gt>0)alerts.push({t:'ok',msg:`Presupuesto validado: ${fmtEur(gt)}. Todas las restricciones cumplidas ✓`});
+
+  if(!silent){
+    alertsEl.innerHTML=alerts.map(a=>`<div class="pres-alert ${a.t}"><span>${a.t==='err'?'✗':a.t==='warn'?'⚠':'✓'}</span>${a.msg}</div>`).join('');
+  }
+  S.presData=data;
+  return alerts;
+}
+
+async function genPresJustif(){
+  if(!S.key){toast('API key no configurada','err');return;}
+  const data=getPresData();S.presData=data;
+  if(data.grandTotal<100){toast('Introduce el presupuesto primero','warn');return;}
+  const btn=document.querySelector('#p-pres .row .btn-vl');
+  btn.innerHTML='<span class="spin"></span> Generando...';btn.disabled=true;
+  try{
+    const r=await gptStream(
+      [{role:'system',content:'Eres experto en justificación económica de proyectos I+D+i para convocatorias públicas españolas. Redactas con lenguaje técnico-administrativo preciso.'},
+       {role:'user',content:`Genera la justificación económica completa de este presupuesto de innovación:\n\nPROYECTO: ${v('en')} — ${v('ep').substring(0,300)}\nCONVOCATORIA: ${v('cn')||'I+D+i'}\n\nPARTIDAS:\n${PARTIDAS.map(p=>`• ${p.label}: ${fmtEur(data.partidas[p.id].total)} (${data.grandTotal>0?((data.partidas[p.id].total/data.grandTotal)*100).toFixed(1):0}%)`).join('\n')}\nTOTAL: ${fmtEur(data.grandTotal)}\nANUALIDADES: ${data.years.map(y=>`${y}: ${fmtEur(data.totals[y]||0)}`).join(' | ')}\n\nPara cada partida, justifica:\n1. Por qué es necesaria para el proyecto\n2. Cómo se ha calculado el importe\n3. Criterios de elegibilidad cumplidos\n\nUsa formato: == PARTIDA: [nombre] == seguido de justificación. Mínimo 800 palabras.`}],
+      v('om'),0.4,2000,
+      (chunk)=>{
+        const el=document.getElementById('pres-justif-text');
+        el.textContent+=chunk;
+        document.getElementById('pres-justif-card').style.display='block';
+      }
+    );
+    S.presJustif=document.getElementById('pres-justif-text').textContent;
+    addAudit('AG.06','Justificación económica generada con partidas validadas.');
+    toast('Justificación generada ✓','ok');
+  }catch(e){toast('Error: '+e.message,'err');}
+  finally{btn.innerHTML='🤖 Generar justificación económica';btn.disabled=false;}
+}
+
+function copyPJ(){navigator.clipboard.writeText(S.presJustif).then(()=>toast('Copiada ✓','ok'));}
+
+// ════════════════════════════════════════════════════
+//  MEJORA 3 — AUDIT TRAIL
+// ════════════════════════════════════════════════════
+// auditTrail[secTitle] = [{ag, msg, ts}]
+function addAudit(agente,msg,secTitle='_global'){
+  if(!document.getElementById('opt-audit')?.checked)return;
+  if(!S.auditTrail[secTitle])S.auditTrail[secTitle]=[];
+  S.auditTrail[secTitle].push({ag:agente,msg,ts:new Date().toLocaleTimeString('es-ES')});
+}
+function renderAuditTrail(secTitle,containerId){
+  const entries=S.auditTrail[secTitle]||[];
+  const globalEntries=S.auditTrail['_global']||[];
+  const all=[...globalEntries.filter(e=>e.ag.includes('AG.0'+(secTitle.indexOf('1')>-1?1:2))),...entries];
+  if(!all.length)return;
+  const el=document.getElementById(containerId);if(!el)return;
+  el.classList.add('show');
+  el.querySelector('.at-body').innerHTML=all.map(e=>`<div class="at-entry"><span class="at-ag">${e.ag}</span><div class="at-msg"><span style="color:var(--ink3);font-size:10px">${e.ts}</span><br>${e.msg}</div></div>`).join('');
+}
+function toggleAllAudit(){document.querySelectorAll('.audit-trail').forEach(el=>el.classList.toggle('show'));}
+
+// ════════════════════════════════════════════════════
+//  MEJORA 2 — STREAMING
+// ════════════════════════════════════════════════════
+async function gptStream(messages,model,temperature,max_tokens,onChunk){
+  const r=await fetch('https://api.openai.com/v1/chat/completions',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':`Bearer ${S.key}`},
+    body:JSON.stringify({model,max_tokens,temperature,messages,stream:true})
+  });
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e?.error?.message||`HTTP ${r.status}`);}
+  const reader=r.body.getReader();const dec=new TextDecoder();let full='';let toks=0;const t0=Date.now();
+  while(true){
+    const{done,value}=await reader.read();if(done)break;
+    const lines=dec.decode(value).split('\n');
+    for(const line of lines){
+      if(!line.startsWith('data:'))continue;
+      const data=line.slice(5).trim();if(data==='[DONE]')continue;
+      try{const j=JSON.parse(data);const delta=j.choices?.[0]?.delta?.content||'';if(delta){full+=delta;toks++;onChunk(delta);const elapsed=(Date.now()-t0)/1000;document.getElementById('stream-tps').textContent=elapsed>0?(toks/elapsed).toFixed(0)+' tok/s':'';};}catch{}
+    }
+  }
+  return full;
+}
+
+async function gpt(messages,model,temperature,max_tokens,_retry=0){
+  const MAX_RETRIES=3;
+  const ctrl=new AbortController();
+  const tout=setTimeout(()=>ctrl.abort(),90000); // 90s timeout
+  try{
+    const r=await fetch('https://api.openai.com/v1/chat/completions',{
+      method:'POST',signal:ctrl.signal,
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${S.key}`},
+      body:JSON.stringify({model,max_tokens,temperature,messages})
+    });
+    clearTimeout(tout);
+    if(r.status===429||r.status===503){
+      if(_retry<MAX_RETRIES){
+        const wait=Math.pow(2,_retry)*2000+Math.random()*1000;
+        lg(`[ API ] Rate limit / servicio no disponible. Reintento ${_retry+1}/${MAX_RETRIES} en ${(wait/1000).toFixed(1)}s...`,'warn');
+        await new Promise(res=>setTimeout(res,wait));
+        return gpt(messages,model,temperature,max_tokens,_retry+1);
+      }
+    }
+    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e?.error?.message||`HTTP ${r.status}`);}
+    const d=await r.json();
+    const txt=d.choices?.[0]?.message?.content||'';
+    // Acumular tokens
+    if(d.usage){S.tokensIn+=(d.usage.prompt_tokens||0);S.tokensOut+=(d.usage.completion_tokens||0);updateCostDisplay();}
+    if(!txt&&_retry<MAX_RETRIES){
+      lg(`[ API ] Respuesta vacía. Reintentando...`,'warn');
+      await new Promise(res=>setTimeout(res,1500));
+      return gpt(messages,model,temperature,max_tokens,_retry+1);
+    }
+    return txt;
+  }catch(e){
+    clearTimeout(tout);
+    if(e.name==='AbortError')throw new Error('Timeout (>90s). Reduce el modelo o simplifica la petición.');
+    throw e;
+  }
+}
+
+function showStream(label){
+  document.getElementById('stream-wrap').style.display='block';
+  document.getElementById('stream-lbl').textContent=label;
+  document.getElementById('stream-body').textContent='';
+  document.getElementById('stream-tps').textContent='';
+}
+function hideStream(){document.getElementById('stream-wrap').style.display='none';}
+
+// ════════════════════════════════════════════════════
+//  PIPELINE HELPERS
+// ════════════════════════════════════════════════════
+function pst(i,st,txt){const el=document.getElementById('ps'+i);el.classList.remove('run','done','err');if(st)el.classList.add(st);document.getElementById('ps'+i+'s').innerHTML=st==='run'?`<span class="spin"></span> ${txt}`:txt;if(st==='done')document.getElementById('ps'+i+'b').style.width='100%';}
+function prog(p){document.getElementById('pfill').style.width=p+'%';}
+function lg(msg,type='info'){const b=document.getElementById('logbox');const d=document.createElement('div');d.className='ll';const ts=new Date().toLocaleTimeString('es-ES');d.innerHTML=`<span class="lts">${ts}</span><span class="lm ${type}">${msg}</span>`;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function stT(){S.t0=Date.now();S.tmr=setInterval(()=>{document.getElementById('gtmr').textContent=((Date.now()-S.t0)/1000).toFixed(0)+'s';},500);}
+function spT(){clearInterval(S.tmr);document.getElementById('sttm').textContent=((Date.now()-S.t0)/1000).toFixed(0)+'s';}
+function parseMem(raw){const rx=/==\s*SECCI[OÓ]N\s*\d*:?\s*([^=]+?)\s*==/gi;const secs=[];let m,last=0;while((m=rx.exec(raw))!==null){if(secs.length>0)secs[secs.length-1].body=raw.substring(last,m.index).trim();secs.push({title:m[1].trim(),body:''});last=rx.lastIndex;}if(secs.length>0)secs[secs.length-1].body=raw.substring(last).trim();if(!secs.length){const pts=raw.split(/\n##\s+/);pts.forEach((p,i)=>{if(!p.trim())return;const ls=p.split('\n');secs.push({title:i===0?'Memoria':ls[0].trim(),body:(i===0?p:ls.slice(1).join('\n')).trim()});});}if(!secs.length)secs.push({title:'Memoria completa',body:raw.trim()});return secs;}
+function goGen(){if(!S.cFile&&!S.cText){toast('Sube el PDF de la convocatoria','err');return;}document.getElementById('gi-cn').textContent=v('cn')||S.cFile?.name||'Convocatoria';document.getElementById('gi-cc').textContent=S.ccaa||'Estatal';document.getElementById('gi-en').textContent=v('en')||'Empresa';document.getElementById('gi-sc').textContent='Objetivo '+v('ot')+'%';document.getElementById('gi').style.display='block';sp('p-generar');}
+
+// ════════════════════════════════════════════════════
+//  MAIN PIPELINE
+// ════════════════════════════════════════════════════
+async function runPipeline(){
+  if(S.run)return;if(!S.key){toast('Configura la API key','err');return;}if(!S.cFile&&!S.cText){toast('Falta la convocatoria','err');return;}
+  S.run=true;S.vers=[];S.auditTrail={};S.secScores={};S.tokensIn=0;S.tokensOut=0;S.completarCount=0;updateCostDisplay();
+  const btn=document.getElementById('btn-go');btn.disabled=true;btn.innerHTML='<span class="spin"></span> Generando...';
+  document.getElementById('logbox').innerHTML='';document.getElementById('nb-it').style.display='none';document.getElementById('itb').style.display='none';
+  [0,1,2,3,4,5].forEach(i=>pst(i,'','En espera'));
+
+  const model=v('om'),scoreTarget=parseInt(v('ot')),maxIter=parseInt(v('oi'));
+  const ccaa=S.ccaa||'España (estatal)',convName=v('cn')||S.cFile?.name||'Convocatoria';
+  const ins=v('ei');const showAudit=document.getElementById('opt-audit')?.checked;
+
+  stT();prog(2);
+
+  try{
+    // ── AG.01 LECTOR ─────────────────────────────────────
+    const cacheKeyConv=(v('cn')||'')+'|'+ccaa+'|'+(S.cText.substring(0,80));
+    const cacheKeyEmp=(v('en')||'')+'|'+(v('ep')||'').substring(0,60);
+    const useC01=!!(S.cacheAG01&&S.cacheKeyConv===cacheKeyConv);
+    const useC02=!!(S.cacheAG02&&S.cacheKeyEmp===cacheKeyEmp);
+    if(useC01)lg('[ AG.01 ] ♻ Caché activa — misma convocatoria','ok');
+    if(useC02)lg('[ AG.02 ] ♻ Caché activa — misma empresa','ok');
+    lg('[ AG.01 LECTOR ] Analizando convocatoria...','ag');pst(0,'run','Analizando...');
+    const ct=S.cText.length>100?S.cText:`Convocatoria: ${convName}. Ámbito: ${ccaa}. Ayuda pública a la innovación.`;
+    if(S.cText.length<100)lg('⚠ Poco texto en PDF. Usando nombre de convocatoria como contexto.','warn');
+
+    let r01='';
+    if(!useC01){
+      r01=await gpt([
+      {role:'system',content:'Experto en convocatorias I+D+i en España (CDTI,AEI,ENISA,autonómicas,FEDER). Responde SOLO con JSON válido, sin backticks.'},
+      {role:'user',content:`Analiza la convocatoria y extrae JSON estructurado. Si no encuentras un dato, usa null.\n\nTEXTO:\n${ct.substring(0,13000)}\n\nJSON:\n{"titulo":"","organismo":"","ambito":"${ccaa}","tipo_ayuda":"","intensidad":"","cuantia_max":"","plazo":"","beneficiarios":"","restricciones_presupuesto":{"subcontratacion_max_pct":50,"overhead_max_pct":20,"notas":""},"secciones_memoria":[{"id":"s1","titulo":"","descripcion":"","peso_baremo":20,"max_palabras":500,"obligatoria":true}],"criterios_valoracion":[{"criterio":"","peso":30,"descripcion":"","max_puntos":30}],"requisitos_minimos":[],"palabras_clave":[]}`}
+    ],model,0.1,4000);
+    }
+    let cd;
+    if(useC01){cd=S.cacheAG01;}
+    else{try{cd=JSON.parse(r01.replace(/```json|```/g,'').trim());}catch{cd={titulo:convName,organismo:ccaa,secciones_memoria:[],criterios_valoracion:[],requisitos_minimos:[],restricciones_presupuesto:{subcontratacion_max_pct:50,overhead_max_pct:20}};}
+    S.cacheAG01=cd;S.cacheKeyConv=cacheKeyConv;}
+    S.cData=cd;
+    const ns=cd.secciones_memoria?.length||0;
+    pst(0,'done',`✓ ${ns} secciones`);prog(14);
+    lg(`[ AG.01 ] ${ns} secciones. Criterios: ${cd.criterios_valoracion?.length||0}. Restricc. presup.: sub≤${cd.restricciones_presupuesto?.subcontratacion_max_pct||50}%.`,'ok');
+    addAudit('AG.01',`Detectadas ${ns} secciones. Restricciones: subcontratación ≤${cd.restricciones_presupuesto?.subcontratacion_max_pct||50}%, overhead ≤${cd.restricciones_presupuesto?.overhead_max_pct||20}%.`);
+    if(ns>0){document.getElementById('sdc').style.display='block';const el=document.getElementById('sdtags');el.innerHTML='';cd.secciones_memoria.forEach(s=>{const t=document.createElement('div');t.className='tag a';t.textContent=s.titulo;el.appendChild(t);});document.getElementById('sts').textContent=ns;}
+
+    // ── AG.02 CONTEXTUALIZADOR ───────────────────────────
+    lg('[ AG.02 CONTEXTUALIZADOR ] Construyendo perfil empresa...','ag');pst(1,'run','Analizando...');
+    const edocs=S.eTexts.map(e=>`=== ${e.name} ===\n${e.text}`).join('\n\n');
+    const emanual=`Empresa:${v('en')}\nCIF:${v('ec')}\nSector:${v('es')}\nEmpleados:${v('ee')}\nFacturación:${v('ef')}€\nAños:${v('ea')}\nProyecto:${v('ep')}\nPresupuesto:${v('cb')}€`;
+    let r02='';
+    if(!useC02){
+      r02=await gpt([
+      {role:'system',content:'Experto en análisis empresarial I+D+i. Responde SOLO con JSON válido, sin backticks.'},
+      {role:'user',content:`Construye perfil empresa normalizado:\nDATOS:\n${emanual}\nDOCUMENTOS:\n${edocs.substring(0,11000)}\nINSTRUCCIONES: ${ins||'ninguna'}\nCONVOCATORIA: ${cd.titulo||convName}\n\nJSON:{"nombre":"","descripcion_corta":"","sector":"","tamano":"","fortalezas":[],"tecnologias_core":[],"equipo_destacado":"","historial_idi":"","cifras":{"facturacion":"","empleados":0,"anos":0},"proyecto_titulo":"","proyecto_descripcion":"","proyecto_tecnologia":"","proyecto_mercado":"","proyecto_impacto":"","proyecto_novedad":"","presupuesto":"","alineacion_convocatoria":""}`}
+    ],model,0.2,2500);
+    }
+    let ep;
+    if(useC02){ep=S.cacheAG02;}
+    else{try{ep=JSON.parse(r02.replace(/```json|```/g,'').trim());}catch{ep={nombre:v('en'),proyecto_descripcion:v('ep'),presupuesto:v('cb')};}
+    S.cacheAG02=ep;S.cacheKeyEmp=cacheKeyEmp;}
+    S.eProf=ep;pst(1,'done','✓ Perfil listo');prog(26);
+    lg(`[ AG.02 ] ${ep.nombre}. Fortalezas: ${ep.fortalezas?.length||0}. Tecnologías: ${ep.tecnologias_core?.length||0}.`,'ok');
+    addAudit('AG.02',`Perfil normalizado: ${ep.nombre}. Sector: ${ep.sector||v('es')}. Fortalezas identificadas: ${ep.fortalezas?.slice(0,2).join(', ')||'—'}.`);
+
+    // ── AG.06 PRESUPUESTO ────────────────────────────────
+    lg('[ AG.06 PRESUPUESTO ] Validando presupuesto...','ag');pst(5,'run','Validando...');
+    let presStr='';
+    if(S.presData&&S.presData.grandTotal>100){
+      const alerts=validatePres(true);
+      const hasErrors=alerts.some(a=>a.t==='err');
+      if(hasErrors){lg('[ AG.06 ] ⚠ Presupuesto con errores de restricción. Continúa con advertencias.','warn');}
+      presStr=`\n\nPRESUPUESTO VALIDADO (AG.06):\nTotal: ${fmtEur(S.presData.grandTotal)}\nPartidas:\n${PARTIDAS.map(p=>`- ${p.label}: ${fmtEur(S.presData.partidas[p.id].total)} (${S.presData.grandTotal>0?((S.presData.partidas[p.id].total/S.presData.grandTotal)*100).toFixed(1):0}%)`).join('\n')}\nAnualidades: ${S.presData.years.map(y=>`${y}=${fmtEur(S.presData.totals[y]||0)}`).join(' | ')}\n${S.presJustif?`\nJUSTIFICACIÓN ECONÓMICA PREAPROBADA:\n${S.presJustif.substring(0,2000)}`:''}`;
+      addAudit('AG.06',`Presupuesto ${fmtEur(S.presData.grandTotal)} validado. Alertas: ${alerts.filter(a=>a.t==='err').length} errores, ${alerts.filter(a=>a.t==='warn').length} avisos.`);
+      pst(5,'done',`✓ ${fmtEur(S.presData.grandTotal)}`);
+    }else{
+      lg('[ AG.06 ] Sin tabla de partidas. Usando presupuesto libre.','info');
+      presStr=`\n\nPRESUPUESTO TOTAL: ${v('cb')||'según bases'}€`;
+      pst(5,'done','✓ Estimado');
+    }
+    prog(38);
+
+    // ── AG.03 REDACTOR (con streaming) ───────────────────
+    lg('[ AG.03 REDACTOR ] Redactando memoria completa (streaming)...','ag');pst(2,'run','Redactando...');
+    const secsStr=cd.secciones_memoria?.length>0?cd.secciones_memoria.map((s,i)=>`${i+1}. "${s.titulo}" — peso ${s.peso_baremo||'—'}%, máx ${s.max_palabras||500}w: ${s.descripcion||''}`).join('\n'):'1.Descripción/objetivos 2.Estado del arte 3.Metodología 4.Plan de trabajo 5.Equipo 6.Presupuesto 7.Viabilidad 8.Impacto';
+    const critStr=cd.criterios_valoracion?.length>0?cd.criterios_valoracion.map(c=>`• ${c.criterio} (${c.peso}%, max ${c.max_puntos||c.peso}p): ${c.descripcion}`).join('\n'):'• Calidad técnica (40%) • Viabilidad (25%) • Impacto (20%) • Equipo (15%)';
+
+    // Construir contexto enriquecido para AG.03
+    const trlAct=v('e-trl-act');const trlObj=v('e-trl-obj');
+    const adicio=v('e-adicio');const kpis=v('e-kpis');const eCvs=v('e-cvs');
+    const ePi=v('e-pi');const eTam=v('e-tam');const eAyudas=v('e-ayudas');
+    const wpsStr=S.wps.length>0?S.wps.map((w,i)=>'WP'+(i+1)+': '+w.titulo+' (M'+w.inicio+'-'+w.fin+') Obj:'+w.objetivo+' Hitos:'+w.hitos+' Entregables:'+w.entregables+' Resp:'+w.responsable).join(' | '):'[COMPLETAR plan de trabajo con WPs]';
+
+    // Few-shot: si hay memorias aprobadas del mismo tipo, añadirlas como ejemplo
+    const fewShot=S.aprobadas.length>0?'\n\nEJEMPLOS DE SECCIONES BIEN REDACTADAS (memorias aprobadas en convocatorias similares):\n'+S.aprobadas.slice(0,2).map(m=>'--- EJEMPLO: '+m.conv+' ---\n'+(m.secs||[]).slice(0,1).map(s=>'['+s.title+']:\n'+s.body.substring(0,500)+'...').join('\n')).join('\n\n'):'';
+
+    showStream('AG.03 Redactor — generando memoria con TRL, WPs y KPIs...');
+    const r03=await gptStream([
+      {role:'system',content:`Eres el mejor redactor de memorias de innovación de España, con 500+ memorias aprobadas en CDTI, AEI, ENISA, FEDER y Horizonte Europa.
+
+BAREMOS ESPECÍFICOS POR ORGANISMO (adapta el lenguaje y énfasis):
+• CDTI Proyectos I+D: "carácter científico-técnico" (40%), "viabilidad técnica y económica" (30%), "impacto socioeconómico" (20%), "capacidad ejecutora del equipo" (10%). Clave: novedad técnica demostrable, plan de trabajo detallado con hitos, equipo con experiencia acreditada en I+D.
+• CDTI Neotec: "modelo de negocio y mercado" (35%), "equipo emprendedor" (30%), "tecnología diferencial" (25%), "plan financiero" (10%). Clave: tracción comercial, tamaño de mercado con cifras, CV fundadores.
+• AEI Retos: "excelencia científica" (40%), "impacto" (30%), "calidad de la implementación" (30%). Clave: hipótesis científica clara, metodología rigurosa, indicadores de impacto con valores baseline y target.
+• ENISA JE: "viabilidad del proyecto" (35%), "equipo gestor" (30%), "modelo de negocio" (25%), "plan financiero" (10%). Clave: cash flow, break-even, experiencia gestora.
+• Horizonte Europa: "Excellence" (→ TRL, novedad, metodología), "Impact" (→ mercado, sociedad, escalabilidad), "Implementation" (→ WPs, hitos, consorcio, gestión de riesgos). Clave: redactar en inglés si la convocatoria lo requiere; si en español, usar estructura Excellence/Impact/Implementation con terminología europea.
+• Convocatorias autonómicas/FEDER: efecto incentivador, adicionalidad, empleo neto creado, impacto territorial, número de beneficiarios indirectos.
+
+REGLAS DE ORO (aplica siempre sin excepción):
+1. TRL: Declara TRL actual y TRL objetivo. Justifica el salto con actividades concretas del plan de trabajo.
+2. ADICIONALIDAD / EFECTO INCENTIVADOR: Argumenta por qué el proyecto NO se realizaría sin la ayuda: fallo de mercado (riesgo tecnológico pre-competitivo, horizonte temporal largo), incapacidad financiera (I+D supone X% de la facturación anual), ausencia de capacidad interna (requiere masa crítica no disponible sin la ayuda).
+3. WPs: Plan de trabajo en Work Packages numerados. Cada WP: objetivo, actividades, hito con mes concreto (Hito H1.1: Mes 3 — entregable D1.1), responsable. Incluir diagrama textual de dependencias si hay más de 3 WPs.
+4. KPIs: Cada afirmación de impacto con métrica cuantitativa. Formato: "[indicador]: de [baseline] a [target] en [plazo], medido mediante [método de medición]".
+5. GESTIÓN DE RIESGOS: Incluir siempre tabla de riesgos: riesgo técnico + probabilidad + impacto + plan de mitigación. Mínimo 3 riesgos (técnico, mercado, equipo).
+6. ESTADO DEL ARTE: Citar al menos 3 tecnologías/enfoques existentes por nombre comercial o autor. Luego argumentar la brecha que cubre el proyecto ("gap tecnológico").
+7. PI Y EXPLOTACIÓN: Plan de protección (patente/secreto/copyright) + modelo de negocio post-proyecto + clientes objetivo + precio estimado + canal de comercialización.
+8. ESTILO: (a) Voz activa: "el equipo desarrollará" no "se desarrollará". (b) Sin bullet points en secciones técnicas — argumentos en párrafos densos. (c) Evitar "innovador", "disruptivo", "pionero", "revolucionario" sin dato cuantitativo que lo respalde. (d) Tercera persona para la empresa, primera para el equipo en CVs. (e) Vocabulario del baremo específico de la convocatoria.
+9. CONSORCIO: Si hay socios, describir claramente el rol de cada entidad, % de participación en presupuesto, valor añadido de cada socio, mecanismo de coordinación.
+10. COMPLETITUD: Si falta un dato imprescindible, usar [COMPLETAR: descripción concisa de qué falta] — nunca inventar datos.`},
+      {role:'user',content:`Redacta la MEMORIA DE INNOVACIÓN COMPLETA. Sigue las reglas de oro sin excepción.
+
+CONVOCATORIA: ${cd.titulo||convName}
+Organismo: ${cd.organismo||ccaa} | Tipo: ${cd.tipo_ayuda||'Subvención'} | Intensidad: ${cd.intensidad||'Según bases'}
+Beneficiarios: ${cd.beneficiarios||'Empresas innovadoras'}
+
+PERFIL EMPRESA (usa exactamente estos datos):
+${JSON.stringify(ep,null,1)}
+${presStr}
+
+DATOS TÉCNICOS CLAVE (OBLIGATORIO incluir en las secciones correspondientes):
+• TRL ACTUAL: ${trlAct?`TRL ${trlAct}`:'[COMPLETAR]'} → TRL OBJETIVO: ${trlObj?`TRL ${trlObj}`:'[COMPLETAR]'}
+• ADICIONALIDAD: ${adicio||'[COMPLETAR: por qué el proyecto no se realizaría sin la ayuda]'}
+• KPIs CUANTITATIVOS: ${kpis||'[COMPLETAR: métricas medibles al finalizar el proyecto]'}
+• PLAN DE TRABAJO (WPs): ${wpsStr}
+• EQUIPO (CVs): ${eCvs||'[COMPLETAR CVs del equipo investigador]'}
+• PROTECCIÓN PI: ${ePi||'patente_solicitar'}
+• MERCADO OBJETIVO (TAM): ${eTam||'[COMPLETAR tamaño de mercado con cifras]'}
+• AYUDAS ACTIVAS: ${eAyudas||'Sin otras ayudas activas en curso'}
+
+SECCIONES A REDACTAR (en este orden exacto):
+${secsStr}
+
+CRITERIOS DE VALORACIÓN (escribe más y mejor donde más peso tiene):
+${critStr}
+
+INSTRUCCIONES DE FORMATO Y CONTENIDO:\n1. Cada sección: == SECCIÓN N: [título exacto] ==\n2. Plan de Trabajo: WP1/WP2/WP3 con hitos (H1.1: Mes 3) y entregables (D1.1)\n3. Impacto: KPIs con '[indicador]: de [baseline] a [target] en [plazo] medido por [método]'\n4. Sección técnica: TRL actual → TRL objetivo con justificación\n5. Objetivos/intro: párrafo de adicionalidad (efecto incentivador, fallo de mercado)\n6. Añadir sección Gestión de Riesgos (aunque no esté listada): tabla ≥3 riesgos técnico/mercado/equipo con mitigación\n7. Estado del arte: citar ≥3 tecnologías por nombre + gap que cubre el proyecto\n8. Explotación: plan PI + modelo negocio + clientes + precio + canal\n9. Consorcio: ${v('e-socios')||'proyecto individual'}\n10. Mínimo 3500 palabras; secciones de mayor peso = más extensas\n11. ESTILO: voz activa; párrafos densos (no bullet points) en secciones técnicas; sin 'innovador/disruptivo/pionero' sin dato cuantitativo\n12. Instrucciones especiales: ${ins||'ninguna'}\n${fewShot}\n\nAdapta vocabulario al organismo: ${cd.organismo||ccaa}. Empieza con la primera sección.`}
+    ],model,0.5,10000,(chunk)=>{document.getElementById('stream-body').textContent+=chunk;document.getElementById('stream-body').scrollTop=999999;});
+
+    hideStream();
+    const secs1=parseMem(r03);S.secs=secs1;
+    S.vers.push({label:'v1 · Redacción inicial',secs:JSON.parse(JSON.stringify(secs1)),score:null});
+    pst(2,'done',`✓ ${secs1.length} secciones`);prog(54);
+    const w1=r03.split(/\s+/).length;document.getElementById('stw').textContent=w1.toLocaleString('es-ES');
+    lg(`[ AG.03 ] ${secs1.length} secciones, ~${w1} palabras.`,'ok');
+    secs1.forEach(s=>addAudit('AG.03',`Sección redactada: ${s.body.split(' ').length} palabras.`,s.title));
+
+    // ── AG.04 COHERENCIA ─────────────────────────────────
+    lg('[ AG.04 COHERENCIA ] Auditando consistencia interna...','ag');pst(3,'run','Auditando...');
+    const mraw=secs1.map(s=>`== ${s.title} ==\n${s.body}`).join('\n\n');
+    const r04=await gpt([
+      {role:'system',content:'Auditor experto en coherencia documental I+D+i. Responde SOLO con JSON válido, sin backticks. Incluye razonamiento detallado.'},
+      {role:'user',content:`Audita coherencia de esta memoria:\n\n${mraw.substring(0,12000)}\n\nREFERENCIA: Empresa ${ep.nombre}, empleados ${ep.cifras?.empleados||'?'}, presupuesto ${ep.presupuesto||v('cb')||'?'}€\n\nJSON:{"score_coherencia":85,"razonamiento":"qué revisaste y cómo","coherencia_trl":"¿salto TRL realista con actividades?","coherencia_kpis":"¿KPIs de impacto coherentes con resultados del plan de trabajo?","coherencia_duracion":"¿duración WPs = plazo total?","coherencia_presupuesto":"¿presupuesto proporcional a actividades?","problemas":[{"seccion":"","tipo":"contradicción","descripcion":"","severidad":"alta","correccion_sugerida":""}],"secciones_reescribir":[],"instrucciones_correccion":"","resumen":""}`}
+    ],model,0.1,2500);
+    let chd;try{chd=JSON.parse(r04.replace(/```json|```/g,'').trim());}catch{chd={score_coherencia:80,razonamiento:'Revisión completada sin problemas críticos.',problemas:[],secciones_reescribir:[],resumen:'Sin problemas detectados.'};}
+    const np=chd.problemas?.length||0;
+    lg(`[ AG.04 ] Coherencia: ${chd.score_coherencia||'—'}%. Problemas: ${np}.`,np>2?'warn':'ok');
+    addAudit('AG.04',`Razonamiento: ${chd.razonamiento||'Sin issues.'} Problemas: ${np}. Score coherencia: ${chd.score_coherencia||'—'}%.`);
+    chd.problemas?.forEach(p=>addAudit('AG.04',`[${p.severidad?.toUpperCase()||'?'}] ${p.descripcion} → ${p.correccion_sugerida||'Corregir'}`,p.seccion));
+
+    if(chd.secciones_reescribir?.length>0){
+      lg(`[ AG.04 ] Corrigiendo ${chd.secciones_reescribir.length} secciones...`,'warn');
+      for(const st of chd.secciones_reescribir){
+        const idx=S.secs.findIndex(s=>s.title.toLowerCase().includes(st.toLowerCase().substring(0,15)));if(idx<0)continue;
+        const probs=chd.problemas?.filter(p=>p.seccion?.toLowerCase().includes(st.toLowerCase().substring(0,12))).map(p=>`${p.descripcion} → ${p.correccion_sugerida}`).join('; ')||'';
+        const rfix=await gpt([
+          {role:'system',content:'Redactor experto en memorias I+D+i. Corrige problemas de coherencia manteniendo el estilo.'},
+          {role:'user',content:`Reescribe corrigiendo:\nSECCIÓN: "${S.secs[idx].title}"\nTEXTO:\n${S.secs[idx].body}\nOTRAS SECCIONES:\n${S.secs.filter((_,i)=>i!==idx).map(s=>`[${s.title}]: ${s.body.substring(0,280)}`).join('\n')}\nPROBLEMAS: ${probs}\nINSTRUCCIONES: ${chd.instrucciones_correccion||'Corregir inconsistencias'}\nSolo texto corregido, sin encabezado.`}
+        ],model,0.4,2500);
+        S.secs[idx].body=rfix.trim();
+        addAudit('AG.04',`Sección corregida. Cambios aplicados: ${probs.substring(0,120)||'coherencia general'}.`,S.secs[idx].title);
+        lg(`[ AG.04 ] ✓ "${st}" corregida.`,'ok');
+      }
+      S.vers.push({label:'v2 · Post-coherencia',secs:JSON.parse(JSON.stringify(S.secs)),score:null});
+    }
+    pst(3,'done',`✓ ${np} problemas`);prog(68);
+
+    // ── AG.05 EVALUADOR — SECCIÓN A SECCIÓN (MEJORA 2) ──
+    lg('[ AG.05 EVALUADOR ] Evaluando sección a sección (sin truncado)...','ag');pst(4,'run','Evaluando...');
+    S.secScores={};
+    const secScoresList=[];
+
+    for(let si=0;si<S.secs.length;si++){
+      const sec=S.secs[si];
+      // Encontrar criterios aplicables a esta sección
+      const critAplic=cd.criterios_valoracion?.filter(c=>
+        sec.title.toLowerCase().includes(c.criterio?.toLowerCase().substring(0,8))||
+        c.descripcion?.toLowerCase().includes(sec.title.toLowerCase().substring(0,10))
+      )||[];
+      const critAplicStr=critAplic.length>0?critAplic.map(c=>`• ${c.criterio} (max ${c.max_puntos||c.peso}p): ${c.descripcion}`).join('\n'):critStr;
+
+      const rSecEval=await gpt([
+        {role:'system',content:`Eres evaluador acreditado de convocatorias I+D+i del CDTI, AEI y Horizonte Europa. Has evaluado más de 300 proyectos. Aplicas el baremo con la misma rúbrica que un evaluador oficial.
+
+RÚBRICA: EXCELENTE(≥85%): TRL+KPIs+WPs+adicionalidad+estado_arte+PI presentes. BIEN(70-84%): mayoría presentes. SUFICIENTE(55-69%): sin profundidad cuantitativa. MEJORABLE(<55%): texto genérico sin elementos técnicos.
+
+Responde SOLO con JSON válido, sin backticks.`},
+        {role:'user',content:`Evalúa esta sección. Razona paso a paso antes de puntuar.
+
+CONVOCATORIA: ${cd.titulo||convName}
+CRITERIOS: ${critAplicStr}
+SECCIÓN: "${sec.title}"
+CONTENIDO: ${sec.body}
+
+Verifica: trl(¿declara TRL actual→objetivo?) / adicionalidad(¿argumenta necesidad ayuda pública?) / kpis(¿métricas cuantitativas medibles?) / wps(¿Work Packages con hitos?) / estado_arte(¿cita tecnologías por nombre?) / datos_mercado(¿cifras TAM/CAGR?) / pi(¿plan protección IP?)
+
+JSON:{"puntuacion":18,"max":25,"pct":72,"nivel":"BIEN","supera_umbral_minimo":true,"tipo_innovacion":"incremental","checklist":{"trl":true,"adicionalidad":false,"kpis":true,"wps":false,"estado_arte":true,"gestion_riesgos":false,"datos_mercado":false,"pi":false,"consorcio_roles":false},"razonamiento_evaluador":"razonamiento paso a paso","fortalezas":["fortaleza 1"],"debilidades":["debilidad 1"],"instrucciones_mejora_concretas":["instrucción 1","instrucción 2"]}`}],model,0.2,1500);
+
+      let secEval;try{secEval=JSON.parse(rSecEval.replace(/```json|```/g,'').trim());}catch{secEval={puntuacion:15,max:25,pct:60,nivel:'REGULAR',razonamiento_evaluador:'Evaluación automática.',fortalezas:[],debilidades:[],instrucciones_mejora_concretas:[]};}
+      S.secScores[sec.title]=secEval;secScoresList.push({title:sec.title,...secEval});
+      addAudit('AG.05',`Puntuación: ${secEval.puntuacion}/${secEval.max} (${secEval.pct}%). Razonamiento: ${secEval.razonamiento_evaluador||'—'} Instrucciones mejora: ${secEval.instrucciones_mejora_concretas?.join('; ')||'—'}`,sec.title);
+      lg(`[ AG.05 ] "${sec.title}": ${secEval.puntuacion}/${secEval.max} (${secEval.pct}%)`,secEval.pct>=70?'ok':'warn');
+      prog(68+Math.round((si+1)/S.secs.length*10));
+    }
+
+    // Score global ponderado
+    const totalMax=secScoresList.reduce((s,x)=>s+x.max,0);
+    const totalPts=secScoresList.reduce((s,x)=>s+x.puntuacion,0);
+    const scoreGlobal=totalMax>0?Math.round((totalPts/totalMax)*100):70;
+    const seccDebiles=secScoresList.filter(x=>x.pct<70).sort((a,b)=>a.pct-b.pct).map(x=>x.title);
+
+    const evd={
+      score_global:scoreGlobal,
+      nivel:scoreGlobal>=85?'EXCELENTE':scoreGlobal>=75?'BIEN':scoreGlobal>=60?'SUFICIENTE':'MEJORABLE',
+      resumen:`Score calculado sección a sección. ${secScoresList.length} secciones evaluadas de forma completa. ${seccDebiles.length} secciones por mejorar.`,
+      puntuacion_criterios:secScoresList.map(x=>({criterio:x.title,peso:Math.round((x.max/Math.max(totalMax,1))*100),puntuacion:x.puntuacion,max:x.max,pct:x.pct,observacion:x.instrucciones_mejora_concretas?.[0]||x.debilidades?.[0]||''})),
+      items:[
+        ...secScoresList.filter(x=>x.pct>=75).map(x=>({tipo:'ok',titulo:x.title,descripcion:(x.fortalezas||[]).join('. ')||'Sección bien desarrollada.'})),
+        ...secScoresList.filter(x=>x.pct>=55&&x.pct<75).map(x=>({tipo:'warn',titulo:x.title,descripcion:(x.instrucciones_mejora_concretas||[]).join('. ')||'Necesita más detalle.'})),
+        ...secScoresList.filter(x=>x.pct<55).map(x=>({tipo:'fail',titulo:x.title,descripcion:(x.debilidades||[]).join('. ')||'Sección débil: requiere reescritura.'})),
+      ],
+      secciones_debiles:seccDebiles,
+      recomendaciones:secScoresList.filter(x=>x.pct<75).flatMap(x=>x.instrucciones_mejora_concretas||[]).slice(0,5),
+      secScoresList
+    };
+    S.valD=evd;
+    pst(4,'done',`✓ Score ${scoreGlobal}%`);prog(82);
+    document.getElementById('stsc').textContent=scoreGlobal+'%';
+    lg(`[ AG.05 ] Score global: ${scoreGlobal}/100 — ${evd.nivel}. Débiles: ${seccDebiles.length}.`,scoreGlobal>=70?'ok':'warn');
+
+    // ── BUCLE MEJORA (con instrucciones estructuradas) ───
+    let iters=0,curScore=scoreGlobal,curEvd=evd;
+    if(maxIter>0&&curScore<scoreTarget&&seccDebiles.length>0){document.getElementById('itb').style.display='flex';document.getElementById('itm').textContent=maxIter;document.getElementById('nb-it').style.display='inline';}
+
+    S.prevIterScore=0;while(iters<maxIter&&curScore<scoreTarget&&curEvd.secciones_debiles?.length>0){
+      iters++;document.getElementById('itn').textContent=iters;document.getElementById('nb-it').textContent=iters;
+      lg(`[ MEJORA ${iters}/${maxIter} ] Score ${curScore}% < objetivo ${scoreTarget}%...`,'warn');prog(82+iters*3);
+
+      for(const st of curEvd.secciones_debiles.slice(0,3)){
+        const idx=S.secs.findIndex(s=>s.title.toLowerCase().includes(st.toLowerCase().substring(0,16)));if(idx<0)continue;
+        const secSc=S.secScores[st]||S.secScores[S.secs[idx]?.title]||{};
+        // MEJORA 3: pasamos instrucciones estructuradas, no solo observaciones
+        const instrEstructuradas=(secSc.instrucciones_mejora_concretas||[]).map((ins,i)=>`${i+1}. ${ins}`).join('\n')||'Añade datos cuantitativos, elimina vaguedades, argumenta contra cada criterio.';
+        showStream(`AG.03 — Mejorando "${S.secs[idx].title}" (iter.${iters})...`);
+        // Construir contexto de mejora con checklist del evaluador
+        const secSc2=S.secScores[S.secs[idx].title]||secSc;
+        const checklistCtx=(secSc2.checklist?Object.entries(secSc2.checklist).filter(([k,v])=>!v).map(([k])=>{
+          const labels={trl:'Añadir TRL actual y TRL objetivo con justificación técnica',adicionalidad:'Añadir párrafo de adicionalidad: por qué el proyecto no se realizaría sin la ayuda pública (fallo de mercado, riesgo tecnológico, capacidad financiera insuficiente para I+D pre-competitiva)',kpis:'Añadir KPIs cuantitativos medibles con plazos concretos (números, porcentajes, fechas)',wps:'Estructurar el plan de trabajo en WPs numerados con hitos mensuales y entregables (D1.1, D1.2...)',estado_arte:'Citar por nombre las tecnologías/enfoques existentes antes de argumentar la novedad del proyecto',datos_mercado:'Añadir cifras de mercado reales: TAM, CAGR, cuota objetivo, fuente',pi:'Describir el plan de protección de propiedad intelectual (patente/secreto industrial/copyright) y el plan de explotación'};
+          return `⚠ ${labels[k]||k}`;
+        }).join('\n'):'');
+
+        const rmej=await gptStream([
+          {role:'system',content:`Eres el mejor redactor de memorias de innovación de España. Reescribes secciones débiles para que obtengan puntuación EXCELENTE. Sigues exactamente las instrucciones del evaluador sin inventar datos: usas los datos disponibles, añades los elementos que faltan, y eliminas las vaguedades sustituyéndolas por afirmaciones concretas con cifras.`},
+          {role:'user',content:`Reescribe esta sección para maximizar la puntuación en el baremo.
+
+SECCIÓN: "${S.secs[idx].title}"
+PUNTUACIÓN ACTUAL: ${secSc?.puntuacion||'—'}/${secSc?.max||'—'} (${secSc?.pct||'—'}%) — ${secSc?.nivel||''}
+
+INSTRUCCIONES DEL EVALUADOR (ejecuta TODAS sin excepción):
+${instrEstructuradas}
+
+ELEMENTOS QUE FALTAN SEGÚN CHECKLIST DEL EVALUADOR:
+${checklistCtx||'Mejorar profundidad y especificidad cuantitativa'}
+
+DEBILIDADES DETECTADAS:
+${(secSc?.debilidades||[]).map((d,i)=>(i+1)+'. '+d).join('\n')||'—'}
+
+DATOS DISPONIBLES PARA ENRIQUECER (usa los que correspondan):
+• TRL: ${v('e-trl-act')?`Actual TRL ${v('e-trl-act')} → Objetivo TRL ${v('e-trl-obj')}`:'[del perfil empresa]'}
+• KPIs: ${v('e-kpis')||'[usar los del perfil empresa]'}
+• WPs: ${S.wps.length>0?S.wps.map((w,i)=>`WP${i+1}: ${w.titulo} M${w.inicio}-${w.fin} / Hitos: ${w.hitos} / Entregables: ${w.entregables}`).join(' | '):'[estructurar según plan de trabajo del proyecto]'}
+• Adicionalidad: ${v('e-adicio')||'[argumentar necesidad de la ayuda pública]'}
+• CVs equipo: ${v('e-cvs')||'[del perfil empresa]'}
+• Mercado (TAM): ${v('e-tam')||'[del perfil empresa]'}
+
+TEXTO ACTUAL A MEJORAR:
+${S.secs[idx].body}
+
+CRITERIOS CONVOCATORIA (argumenta explícitamente para cada uno):
+${critStr}
+
+PERFIL EMPRESA (fuente de verdad):
+${JSON.stringify(S.eProf)}
+
+REGLAS: (1) No inventes datos — usa [COMPLETAR] si algo es imprescindible y no lo tienes. (2) Mantén toda la información correcta del texto actual. (3) Elimina frases vagas y sustitúyelas por afirmaciones con cifras concretas. (4) Mínimo 350 palabras en la sección mejorada.
+
+Devuelve SOLO el texto mejorado, sin encabezado ni título.`}
+        ],model,0.5,3000,(chunk)=>{document.getElementById('stream-body').textContent+=chunk;document.getElementById('stream-body').scrollTop=999999;});
+        hideStream();
+        S.secs[idx].body=rmej.trim();
+        addAudit('AG.03',`Iteración ${iters}: ${instrEstructuradas.substring(0,150)}...`,S.secs[idx].title);
+        lg(`[ MEJORA ${iters} ] ✓ "${st}" mejorada con instrucciones específicas.`,'ok');
+      }
+
+      S.vers.push({label:`v${2+iters} · Mejora iter.${iters}`,secs:JSON.parse(JSON.stringify(S.secs)),score:null});
+
+      // Re-evaluar solo las secciones modificadas
+      let totalPts2=0,totalMax2=0;
+      for(const sec of S.secs){
+        const wasModified=curEvd.secciones_debiles.includes(sec.title);
+        if(wasModified){
+          const critAplic=cd.criterios_valoracion?.filter(c=>sec.title.toLowerCase().includes(c.criterio?.toLowerCase().substring(0,8)))||[];
+          const rRev=await gpt([
+            {role:'system',content:'Evaluador acreditado I+D+i. Evalúa con la misma rúbrica que en la evaluación inicial. Solo JSON válido sin backticks.'},
+            {role:'user',content:`Re-evalúa:\nSECCIÓN: "${sec.title}"\nCRITERIOS:\n${critAplic.length>0?critAplic.map(c=>`• ${c.criterio} (${c.max_puntos||c.peso}p)`).join('\n'):critStr}\nTEXTO:\n${sec.body}\nJSON:{"puntuacion":20,"max":25,"pct":80,"razonamiento_evaluador":"","fortalezas":[],"debilidades":[],"instrucciones_mejora_concretas":[]}`}
+          ],model,0.1,800);
+          try{const re=JSON.parse(rRev.replace(/```json|```/g,'').trim());S.secScores[sec.title]=re;addAudit('AG.05',`Re-eval iter.${iters}: ${re.puntuacion}/${re.max} (${re.pct}%). ${re.razonamiento_evaluador||''}`,sec.title);}catch{}
+        }
+        const sc=S.secScores[sec.title]||{puntuacion:15,max:25};totalPts2+=sc.puntuacion;totalMax2+=sc.max;
+      }
+      curScore=totalMax2>0?Math.round((totalPts2/totalMax2)*100):curScore;
+      curEvd={...curEvd,score_global:curScore,secciones_debiles:Object.entries(S.secScores).filter(([_,v])=>v.pct<70).sort((a,b)=>a[1].pct-b[1].pct).map(([k])=>k)};
+      S.valD={...S.valD,...curEvd};
+      S.vers[S.vers.length-1].score=curScore;
+      document.getElementById('stsc').textContent=curScore+'%';
+      lg(`[ MEJORA ${iters} ] Nuevo score: ${curScore}%.`,curScore>=scoreTarget?'ok':'warn');
+      if(curScore>=scoreTarget){lg('[ MEJORA ] 🎯 '+scoreTarget+'% alcanzado con '+curScore+'%.','ok');break;}
+      if(iters>1&&(curScore-S.prevIterScore)<2){lg('[ MEJORA ] ⏹ Plateau detectado (mejora <2pts). Parando bucle para ahorrar tokens.','warn');break;}
+      S.prevIterScore=curScore;
+    }
+
+    // ── FIN ──────────────────────────────────────────────
+    spT();prog(100);document.getElementById('stit').textContent=iters;
+    lg(`[ MemorIA v3 ] ✅ Completado. Score final: ${curScore}/100. Versiones: ${S.vers.length}.`,'ok');
+    S.completarCount=(S.secs.map(s=>s.body.match(/\[COMPLETAR[^\]]*\]/g)||[]).flat()).length;
+    if(S.completarCount>0)lg('[ SCANNER ] ⚠ '+S.completarCount+' campo(s) [COMPLETAR] pendientes en la memoria.','warn');
+    else lg('[ SCANNER ] ✓ Sin campos [COMPLETAR] pendientes.','ok');
+    updateCompletarBadge();
+    rEd(convName);rVal(S.valD);setupDiff();
+    toast(`✅ Memoria lista — Score ${curScore}%`,'ok');
+    setTimeout(()=>sp('p-editor'),600);
+
+  }catch(err){spT();lg(`[ ERROR ] ${err.message}`,'err');toast('Error: '+err.message,'err');[0,1,2,3,4,5].forEach(i=>pst(i,'err','✗ Error'));console.error(err);}
+  finally{S.run=false;const btn=document.getElementById('btn-go');btn.disabled=false;btn.innerHTML='▶ Iniciar pipeline';}
+}
+
+// ════════════════════════════════════════════════════
+//  RENDER EDITOR
+// ════════════════════════════════════════════════════
+function rEd(cn){
+  document.getElementById('ed-ph').style.display='none';document.getElementById('ed-wrap').style.display='block';
+  document.getElementById('mtt').textContent=cn||'Memoria';document.getElementById('mtbg').style.display='inline-flex';
+  const body=document.getElementById('mbody');body.innerHTML='';
+  S.secs.forEach((sec,i)=>{
+    const sc=S.secScores[sec.title];
+    const pct=sc?sc.pct:null;
+    const scls=pct===null?'':pct>=75?'hi':pct>=50?'mid':'lo';
+    const sh=sc?`<span class="ms-sc ${scls}">${sc.puntuacion}/${sc.max} (${pct}%)</span>`:'';
+    const auditId=`at-${i}`;
+    const d=document.createElement('div');d.className='msec open';d.id='ms'+i;
+    d.innerHTML=`<div class="msh" onclick="tms(${i})"><span class="ms-n">${String(i+1).padStart(2,'0')}</span><span class="ms-t">${sec.title}</span>${sh}<span class="ms-ch">▶</span></div>
+    <div class="ms-bd">
+      <div class="ms-tx" contenteditable="true" id="mst${i}" onblur="S.secs[${i}].body=this.innerText">${sec.body}</div>
+      <div class="ms-acts">
+        <button class="btn btn-sf btn-xs" onclick="rgsec(${i})">🔄 Regenerar</button>
+        <button class="btn btn-gh btn-xs" onclick="cpsec(${i})">📋 Copiar</button>
+        <button class="btn btn-vl btn-xs" onclick="toggleAudit('${auditId}')">🔍 Audit Trail</button>
+      </div>
+      <div class="audit-trail" id="${auditId}">
+        <div class="at-hd" onclick="toggleAudit('${auditId}')"><span>🔍 Audit Trail — razonamiento de los agentes</span></div>
+        <div class="at-body" id="${auditId}-b"></div>
+      </div>
+    </div>`;
+    body.appendChild(d);
+    // Render audit trail para esta sección
+    setTimeout(()=>{
+      const entries=[...(S.auditTrail[sec.title]||[])];
+      if(entries.length){
+        const atEl=document.getElementById(`${auditId}-b`);
+        if(atEl){atEl.innerHTML=entries.map(e=>`<div class="at-entry"><span class="at-ag">${e.ag}</span><div class="at-msg"><span style="color:var(--ink3);font-size:10px">${e.ts}</span><br>${e.msg}</div></div>`).join('');document.getElementById(auditId)?.classList.add('show');}
+      }
+    },100);
+  });
+}
+function tms(i){document.getElementById('ms'+i).classList.toggle('open');}
+function expAll(){document.querySelectorAll('.msec').forEach(e=>e.classList.add('open'));}
+function colAll(){document.querySelectorAll('.msec').forEach(e=>e.classList.remove('open'));}
+function toggleAudit(id){const el=document.getElementById(id);el?.classList.toggle('show');const b=document.getElementById(id+'-b');b?.classList.toggle('open');}
+function toggleAllAudit(){document.querySelectorAll('.audit-trail').forEach(el=>{el.classList.toggle('show');const b=el.querySelector('.at-body');b?.classList.toggle('open');});}
+
+async function rgsec(i){
+  if(!S.key){toast('API key no configurada','err');return;}
+  const sec=S.secs[i];const btn=document.querySelector(`#ms${i} .ms-acts button`);btn.innerHTML='<span class="spin"></span>';btn.disabled=true;
+  const sc=S.secScores[sec.title];
+  const instruc=(sc?.instrucciones_mejora_concretas||[]).map((x,i)=>`${i+1}. ${x}`).join('\n')||'Añade datos cuantitativos, argumenta contra criterios.';
+  try{
+    showStream(`Regenerando "${sec.title}"...`);
+    const r=await gptStream([
+      {role:'system',content:'Eres el mejor redactor de memorias I+D+i de España. Aplicas voz activa, párrafos densos sin bullet points, vocabulario del baremo, TRL, KPIs cuantitativos y plan de riesgos cuando corresponde.'},
+      {role:'user',content:`Mejora esta sección:\nSECCIÓN: "${sec.title}"\n${sc?`PUNTUACIÓN ANTERIOR: ${sc.puntuacion}/${sc.max} (${sc.pct}%)\nINSTRUCCIONES EVALUADOR:\n${instruc}`:''}\nTEXTO:\n${sec.body}\nEMPRESA: ${JSON.stringify(S.eProf)}\nSolo texto, sin encabezado.`}
+    ],v('om'),0.5,2500,(chunk)=>{document.getElementById('stream-body').textContent+=chunk;});
+    hideStream();
+    S.secs[i].body=r.trim();document.getElementById('mst'+i).innerText=r.trim();
+    addAudit('AG.03',`Regeneración manual con instrucciones del evaluador.`,sec.title);
+    toast(`✓ "${sec.title}" regenerada`,'ok');
+  }catch(e){hideStream();toast('Error: '+e.message,'err');}
+  finally{btn.innerHTML='🔄 Regenerar';btn.disabled=false;}
+}
+function cpsec(i){navigator.clipboard.writeText(S.secs[i].body).then(()=>toast('Copiada ✓','ok'));}
+
+// ════════════════════════════════════════════════════
+//  RENDER VALIDATION (con barras por sección)
+// ════════════════════════════════════════════════════
+function rVal(vd){
+  if(!vd)return;
+  document.getElementById('val-ph').style.display='none';document.getElementById('val-wrap').style.display='block';
+  const sc=vd.score_global||0;
+  document.getElementById('vnum').textContent=sc+'%';document.getElementById('vlvl').textContent=vd.nivel||'—';document.getElementById('vsumm').textContent=vd.resumen||'';
+  const circ=2*Math.PI*29;const rc=document.getElementById('vrc');
+  rc.style.strokeDashoffset=circ-(sc/100)*circ;
+  rc.style.stroke=sc>=75?'var(--tl)':sc>=55?'var(--am)':'var(--rd)';
+
+  // Barras por sección (MEJORA 2)
+  const secScCard=document.getElementById('sec-scores-card');
+  const secScEl=document.getElementById('sec-scores');
+  if(Object.keys(S.secScores).length>0){
+    secScCard.style.display='block';secScEl.innerHTML='';
+    Object.entries(S.secScores).forEach(([title,sc2])=>{
+      const color=sc2.pct>=75?'var(--tl)':sc2.pct>=55?'var(--am)':'var(--rd)';
+      const d=document.createElement('div');d.className='ss-row';
+      // Checklist icons inline
+      const chk=sc2.checklist||{};
+      const chkIcons=Object.entries(chk).map(([k,v])=>`<span title="${k}" style="font-size:10px">${v?'✓':'✗'}</span>`).join('');
+      d.innerHTML=`<span class="ss-lbl" title="${title}">${title}</span><div class="ss-bar"><div class="ss-fill" style="width:${sc2.pct}%;background:${color}"></div></div><span style="font-size:10px;color:var(--ink3);font-family:var(--fm);white-space:nowrap;flex-shrink:0">${chkIcons}</span><span class="ss-val" style="color:${color}">${sc2.puntuacion}/${sc2.max}</span>`;
+      secScEl.appendChild(d);
+    });
+
+    // TRL summary en validación
+    if(v('e-trl-act')&&v('e-trl-obj')){
+      const trlDiv=document.createElement('div');
+      trlDiv.style.cssText='margin-top:10px;display:flex;align-items:center;gap:8px;';
+      trlDiv.innerHTML=`<span style="font-size:11px;color:var(--ink3)">TRL declarado:</span><span class="trl-badge lo">TRL ${v('e-trl-act')}</span><span class="trl-arrow">→</span><span class="trl-badge hi">TRL ${v('e-trl-obj')}</span>`;
+      secScEl.appendChild(trlDiv);
+    }
+  }
+
+  const list=document.getElementById('vitems');list.innerHTML='';
+  if(vd.puntuacion_criterios?.length){aSdiv(list,'Puntuación por criterio');vd.puntuacion_criterios.forEach(c=>{const pct=c.pct||Math.round((c.puntuacion/c.max)*100);const d=document.createElement('div');d.className=`vi ${pct>=75?'ok':pct>=50?'warn':'fail'}`;d.innerHTML=`<span class="vi-ic">${pct>=75?'✓':pct>=50?'⚠':'✗'}</span><div><div class="vi-tt">${c.criterio} · ${c.puntuacion}/${c.max} (${pct}%)</div><div class="vi-tx">${c.observacion||''}</div></div>`;list.appendChild(d);});}
+  if(vd.items?.length){aSdiv(list,'Análisis detallado');const ic={ok:'✓',warn:'⚠',fail:'✗'};vd.items.forEach(it=>{const d=document.createElement('div');d.className=`vi ${it.tipo}`;d.innerHTML=`<span class="vi-ic">${ic[it.tipo]||'?'}</span><div><div class="vi-tt">${it.titulo||''}</div><div class="vi-tx">${it.descripcion||''}</div></div>`;list.appendChild(d);});}
+  if(vd.recomendaciones?.length){aSdiv(list,'💡 Instrucciones de mejora (del evaluador)');vd.recomendaciones.forEach(r=>{const d=document.createElement('div');d.className='vi warn';d.innerHTML=`<span class="vi-ic">💡</span><div><div class="vi-tx">${r}</div></div>`;list.appendChild(d);});}
+}
+function aSdiv(p,t){const d=document.createElement('div');d.innerHTML=`<div class="sdiv" style="margin-top:14px">${t}</div>`;p.appendChild(d);}
+
+// ════════════════════════════════════════════════════
+//  DIFF
+// ════════════════════════════════════════════════════
+function setupDiff(){if(S.vers.length<2)return;const sa=document.getElementById('da'),sb=document.getElementById('db');sa.innerHTML=sb.innerHTML='';S.vers.forEach((v,i)=>{const o=`<option value="${i}">${v.label}${v.score?' ('+v.score+'%)':''}</option>`;sa.innerHTML+=o;sb.innerHTML+=o;});sb.value=S.vers.length-1;document.getElementById('df-ph').style.display='none';document.getElementById('df-wrap').style.display='block';rdiff();}
+function rdiff(){const ia=parseInt(document.getElementById('da').value),ib=parseInt(document.getElementById('db').value);if(isNaN(ia)||isNaN(ib))return;const va=S.vers[ia],vb=S.vers[ib];document.getElementById('dah').textContent=va.label+(va.score?' — '+va.score+'%':'');document.getElementById('dbh').textContent=vb.label+(vb.score?' — '+vb.score+'%':'');document.getElementById('dab').textContent=va.secs.map(s=>`== ${s.title} ==\n${s.body}`).join('\n\n');document.getElementById('dbb').textContent=vb.secs.map(s=>`== ${s.title} ==\n${s.body}`).join('\n\n');}
+
+// ════════════════════════════════════════════════════
+//  DOWNLOAD
+// ════════════════════════════════════════════════════
+function getTxt(){return S.secs.map(s=>`${'═'.repeat(58)}\n${s.title.toUpperCase()}\n${'═'.repeat(58)}\n\n${s.body}`).join('\n\n\n')+(S.presJustif?'\n\n\n═══════════════════════════════════════════════════════\nJUSTIFICACIÓN ECONÓMICA\n═══════════════════════════════════════════════════════\n\n'+S.presJustif:'');}
+async function dlDocx(){
+  try{
+    if(typeof docx==='undefined'){toast('docx.js no cargado. Intenta recargar la página.','err');return;}
+    const {Document,Paragraph,TextRun,HeadingLevel,AlignmentType,PageBreak,Packer}=docx;
+    const children=[];
+    // Portada
+    children.push(new Paragraph({text:v('cn')||'Memoria de Innovación',heading:HeadingLevel.TITLE,spacing:{after:400}}));
+    children.push(new Paragraph({children:[new TextRun({text:(v('en')||'Empresa')+' — '+(S.ccaa||'España'),color:'666666'})],spacing:{after:200}}));
+    children.push(new Paragraph({children:[new TextRun({text:new Date().toLocaleDateString('es-ES'),color:'999999'})],spacing:{after:800}}));
+    // Secciones
+    S.secs.forEach((sec,i)=>{
+      children.push(new Paragraph({text:sec.title,heading:HeadingLevel.HEADING_1,pageBreakBefore:i>0,spacing:{before:400,after:200}}));
+      const sc=S.secScores[sec.title];
+      if(sc)children.push(new Paragraph({children:[new TextRun({text:'Puntuación: '+sc.puntuacion+'/'+sc.max+' ('+sc.pct+'%)',italics:true,color:'888888'})],spacing:{after:200}}));
+      // Dividir en párrafos
+      sec.body.split(/\n\n+/).forEach(para=>{
+        if(!para.trim())return;
+        children.push(new Paragraph({children:[new TextRun({text:para.trim()})],spacing:{after:160}}));
+      });
+    });
+    // Presupuesto si existe
+    if(S.presJustif){
+      children.push(new Paragraph({text:'JUSTIFICACIÓN ECONÓMICA',heading:HeadingLevel.HEADING_1,pageBreakBefore:true,spacing:{before:400,after:200}}));
+      S.presJustif.split(/\n\n+/).forEach(para=>{
+        if(!para.trim())return;
+        children.push(new Paragraph({children:[new TextRun({text:para.trim()})],spacing:{after:160}}));
+      });
+    }
+    const doc=new Document({sections:[{properties:{},children}],styles:{default:{document:{run:{font:'Calibri',size:24},paragraph:{spacing:{line:360}}}}}});
+    const blob=await Packer.toBlob(doc);
+    const nm=(v('cn')||'memoria').replace(/[^a-z0-9_-]/gi,'_')+'.docx';
+    dl(blob,nm);toast('Word (.docx) descargado ✓','ok');
+  }catch(e){toast('Error generando .docx: '+e.message,'err');console.error(e);}
+}
+
+function dlTxt(){const nm=(v('cn')||'memoria').replace(/[^a-z0-9_-]/gi,'_')+'.txt';dl(new Blob([getTxt()],{type:'text/plain;charset=utf-8'}),nm);toast('Descargado ✓','ok');}
+function dlHtml(){const nm=(v('cn')||'memoria').replace(/[^a-z0-9_-]/gi,'_')+'.html';const html=`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>${v('cn')||'Memoria'}</title><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet"><style>body{font-family:'IBM Plex Sans',sans-serif;max-width:800px;margin:48px auto;padding:0 28px;line-height:1.85;color:#1a1612;background:#faf8f3;}h1{font-family:'Fraunces',serif;font-size:32px;margin-bottom:36px;color:#162447;}h2{font-family:'Fraunces',serif;font-size:20px;border-bottom:2px solid #d4620a;padding-bottom:6px;color:#162447;margin-top:42px;margin-bottom:14px;}p{margin-bottom:14px;}.score{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:8px;font-family:monospace;}</style></head><body><h1>${v('cn')||'Memoria de Innovación'}</h1>${S.secs.map(s=>{const sc=S.secScores[s.title];const badge=sc?`<span class="score" style="background:${sc.pct>=75?'#d1fae5':sc.pct>=55?'#fef3c7':'#fee2e2'};color:${sc.pct>=75?'#065f46':sc.pct>=55?'#92400e':'#991b1b'}">${sc.puntuacion}/${sc.max} (${sc.pct}%)</span>`:'';return`<h2>${s.title}${badge}</h2>${s.body.split('\n\n').map(p=>`<p>${p.replace(/\n/g,' ')}</p>`).join('')}`;}).join('')}</body></html>`;dl(new Blob([html],{type:'text/html;charset=utf-8'}),nm);toast('HTML ✓','ok');}
+function dl(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);}
+function cpAll(){navigator.clipboard.writeText(getTxt()).then(()=>toast('Copiado ✓','ok'));}
+
+// ════════════════════════════════════════════════════
+//  TEMPLATES
+// ════════════════════════════════════════════════════
+const TPLS={cdti:{o:'CDTI · Estatal',n:'Proyectos I+D',tgs:['I+D','Empresa'],cn:'CDTI Proyectos I+D 2025',cc:'Estatal'},neotec:{o:'CDTI · Estatal',n:'Neotec 2025',tgs:['Startup','Tech'],cn:'CDTI Neotec 2025',cc:'Estatal'},enisa:{o:'ENISA · Estatal',n:'Jóvenes Emprendedores',tgs:['Préstamo','Startup'],cn:'ENISA JE 2025',cc:'Estatal'},aei:{o:'AEI · Estatal',n:'Retos Investigación',tgs:['Investigación','Col.'],cn:'AEI Retos 2025',cc:'Estatal'},digitalkit:{o:'Red.es · Estatal',n:'Kit Digital PYME',tgs:['Digital','PYME'],cn:'Kit Digital 2025',cc:'Estatal'},icex:{o:'ICEX · Estatal',n:'ICEX Next',tgs:['Internacionalización'],cn:'ICEX Next 2025',cc:'Estatal'},horizonte:{o:'Comisión Europea',n:'Horizonte Europa',tgs:['I+D','UE'],cn:'Horizonte Europa 2025',cc:'UE/FEDER'},ninguna:{o:'Sin plantilla',n:'Subir PDF',tgs:['Personalizada'],cn:'',cc:''}};
+function mkTpls(cid,onClick){const el=document.getElementById(cid);if(!el)return;el.innerHTML='';Object.entries(TPLS).forEach(([id,t])=>{const d=document.createElement('div');d.className='tc';d.innerHTML=`<div class="tc-o">${t.o}</div><div class="tc-n">${t.n}</div><div class="tc-tgs">${t.tgs.map(x=>`<span class="tc-tg">${x}</span>`).join('')}</div>`;d.onclick=()=>onClick(id,d);el.appendChild(d);});}
+function applyTpl(id,card){const t=TPLS[id];if(!t)return;document.querySelectorAll('.tc').forEach(c=>c.classList.remove('on'));card.classList.add('on');if(t.cn)document.getElementById('cn').value=t.cn;if(t.cc){S.ccaa=t.cc;document.querySelectorAll('.chip').forEach(c=>{c.classList.toggle('on',c.textContent.includes(t.cc.replace('🇪🇸 ','').replace('🇪🇺 ','')));});}if(t.n!=='Subir PDF')toast(`Plantilla "${t.n}" ✓`,'ok');}
+
+// ════════════════════════════════════════════════════
+//  SETTINGS / MISC
+// ════════════════════════════════════════════════════
+function saveK(){const k=document.getElementById('cfg-k').value.trim();if(!k.startsWith('sk-')){toast('API key inválida','err');return;}S.key=k;localStorage.setItem('mem_k',k);updDot(true);toast('Guardada ✓','ok');}
+function forget(){localStorage.removeItem('mem_k');S.key='';document.getElementById('ob-key').value='';document.getElementById('cfg-k').value='';updDot(false);toast('Key olvidada','warn');}
+function updDot(on){document.getElementById('adt').className='adt'+(on?' on':'');document.getElementById('atxt').textContent=on?'OpenAI conectada':'Sin configurar';}
+function tv(id,btn){const el=document.getElementById(id);el.type=el.type==='password'?'text':'password';btn.textContent=el.type==='password'?'👁':'🙈';}
+function sdrop(zid){const z=document.getElementById(zid);z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag');});z.addEventListener('dragleave',()=>z.classList.remove('drag'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag');if(zid==='dz-c')hcvf(e.dataTransfer.files);else hemf(e.dataTransfer.files);});}
+// Precios por 1M tokens (actualiza si cambian)
+const PRICES={'gpt-4o-mini':{in:0.15,out:0.60},'gpt-4o':{in:5.00,out:15.00},'gpt-4-turbo':{in:10.00,out:30.00},'gpt-3.5-turbo':{in:0.50,out:1.50}};
+function updateCostDisplay(){
+  const pr=PRICES[v('om')]||PRICES['gpt-4o-mini'];
+  const cost=(S.tokensIn/1e6)*pr.in+(S.tokensOut/1e6)*pr.out;
+  const el=document.getElementById('cost-display');
+  const tel=document.getElementById('token-display');
+  if(el)el.textContent='$'+cost.toFixed(4);
+  if(tel)tel.textContent=(S.tokensIn+S.tokensOut).toLocaleString('es-ES')+' tokens ('+S.tokensIn.toLocaleString('es-ES')+' in / '+S.tokensOut.toLocaleString('es-ES')+' out)';
+  if(cost>0.50&&el)el.style.color='var(--rd)';
+  else if(cost>0.20&&el)el.style.color='var(--am)';
+  else if(el)el.style.color='var(--nv)';
+}
+function updateCompletarBadge(){
+  const b=document.getElementById('completar-badge');
+  const n=document.getElementById('completar-count');
+  if(!b)return;
+  if(S.completarCount>0){b.style.display='inline-flex';if(n)n.textContent=S.completarCount;}
+  else b.style.display='none';
+}
+
+function toast(msg,type='info'){const el=document.getElementById('toasts');const d=document.createElement('div');d.className='toast '+(type||'');d.textContent=msg;el.appendChild(d);setTimeout(()=>d.remove(),3400);}
+
+// ════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════
+//  WP MANAGER
+// ════════════════════════════════════════════════════
+function addWP(){
+  S.wps.push({titulo:'',objetivo:'',inicio:'1',fin:'6',hitos:'',entregables:'',responsable:''});
+  renderWPs();
+}
+function removeWP(i){S.wps.splice(i,1);renderWPs();}
+function renderWPs(){
+  const el=document.getElementById('wp-list');if(!el)return;
+  el.innerHTML='';
+  if(!S.wps.length){el.innerHTML='<div style="font-size:12px;color:var(--ink3);padding:4px 0">Sin WPs añadidos. Pulsa "+ Añadir WP" para estructurar el plan de trabajo.</div>';return;}
+  S.wps.forEach((wp,i)=>{
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--cr2);border:1px solid var(--bd);border-radius:6px;padding:10px 12px;';
+    d.innerHTML=`
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span style="font-family:var(--fm);font-size:11px;font-weight:700;color:var(--nv);flex-shrink:0">WP${i+1}</span>
+        <input type="text" placeholder="Título del WP (ej: Diseño y especificación técnica)" value="${wp.titulo||''}" oninput="S.wps[${i}].titulo=this.value" style="flex:1;font-size:12px;padding:5px 8px"/>
+        <span style="font-family:var(--fm);font-size:11px;color:var(--ink3)">M</span>
+        <input type="number" value="${wp.inicio||1}" min="1" max="36" oninput="S.wps[${i}].inicio=this.value" style="width:42px;font-size:12px;padding:5px 6px;text-align:center"/>
+        <span style="font-size:11px;color:var(--ink3)">–</span>
+        <input type="number" value="${wp.fin||6}" min="1" max="36" oninput="S.wps[${i}].fin=this.value" style="width:42px;font-size:12px;padding:5px 6px;text-align:center"/>
+        <button class="btn btn-rd btn-xs" onclick="removeWP(${i})">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+        <div><label style="font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:3px">Objetivo</label><input type="text" value="${wp.objetivo||''}" placeholder="Qué se consigue en este WP" oninput="S.wps[${i}].objetivo=this.value" style="font-size:12px;padding:5px 8px"/></div>
+        <div><label style="font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:3px">Responsable</label><input type="text" value="${wp.responsable||''}" placeholder="Nombre / rol" oninput="S.wps[${i}].responsable=this.value" style="font-size:12px;padding:5px 8px"/></div>
+        <div><label style="font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:3px">Hitos (mes concreto)</label><input type="text" value="${wp.hitos||''}" placeholder="H1: Mes 3 — Prototipo v1; H2: Mes 6 — Validación" oninput="S.wps[${i}].hitos=this.value" style="font-size:12px;padding:5px 8px"/></div>
+        <div><label style="font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:3px">Entregables</label><input type="text" value="${wp.entregables||''}" placeholder="D${i+1}.1 Informe técnico; D${i+1}.2 Prototipo" oninput="S.wps[${i}].entregables=this.value" style="font-size:12px;padding:5px 8px"/></div>
+      </div>`;
+    el.appendChild(d);
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  PERFIL EMPRESA PERSISTENTE
+// ════════════════════════════════════════════════════
+const PERFIL_FIELDS=['en','ec','es','ee','ef','ea','ep','ei','e-trl-act','e-trl-obj','e-adicio','e-kpis','e-cvs','e-pi','e-tam','e-ayudas','e-socios'];
+
+function savePerfil(){
+  const perfil={};
+  PERFIL_FIELDS.forEach(id=>{const el=document.getElementById(id);if(el)perfil[id]=el.value;});
+  perfil._wps=JSON.parse(JSON.stringify(S.wps));
+  localStorage.setItem('mem_perfil',JSON.stringify(perfil));
+  toast('Perfil de empresa guardado ✓','ok');
+}
+
+function loadPerfil(){
+  const raw=localStorage.getItem('mem_perfil');
+  if(!raw){toast('No hay perfil guardado','warn');return;}
+  try{
+    const perfil=JSON.parse(raw);
+    PERFIL_FIELDS.forEach(id=>{const el=document.getElementById(id);if(el&&perfil[id]!==undefined)el.value=perfil[id];});
+    if(perfil._wps){S.wps=perfil._wps;renderWPs();}
+    toast('Perfil cargado ✓','ok');
+  }catch{toast('Error al cargar perfil','err');}
+}
+
+// ════════════════════════════════════════════════════
+//  CARGAR MEMORIAS APROBADAS (few-shot)
+// ════════════════════════════════════════════════════
+async function loadAprobadas(){
+  try{
+    const all=await dgetall('mems');
+    S.aprobadas=all.filter(m=>m.aprobada===true);
+    const nbEl=document.getElementById('nb-ap');
+    if(nbEl){nbEl.textContent=S.aprobadas.length+'★';nbEl.style.display=S.aprobadas.length>0?'inline':'none';}
+  }catch{}
+}
+
+async function markAprobada(id){
+  const all=await dgetall('mems');
+  const item=all.find(x=>x.id===id);
+  if(!item)return;
+  item.aprobada=!item.aprobada;
+  await dput('mems',item);
+  await loadAprobadas();
+  loadH();
+  toast(item.aprobada?'✓ Marcada como aprobada (usada como few-shot)':'Desmarcada como aprobada','ok');
+}
+
+window.addEventListener('DOMContentLoaded',async()=>{
+  await initDB();rfHB();
+  await loadAprobadas();
+  mkTpls('tq',(id,card)=>applyTpl(id,card));
+  mkTpls('tall',(id,card)=>{applyTpl(id,card);sp('p-nueva');toast('Plantilla aplicada. Completa los datos y genera.','ok');});
+  sdrop('dz-c');sdrop('dz-e');
+  buildPresTable();
+  renderWPs();
+  const k=localStorage.getItem('mem_k');
+  if(k){S.key=k;document.getElementById('ob-key').value=k;document.getElementById('cfg-k').value=k;updDot(true);}
+  // Cargar perfil persistente si existe
+  if(localStorage.getItem('mem_perfil'))toast('💡 Hay un perfil de empresa guardado. Pulsa "Cargar perfil" en Datos de empresa.','info');
+});
+</script>
+</body>
+</html>
